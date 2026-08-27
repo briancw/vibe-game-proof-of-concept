@@ -1,0 +1,21 @@
+{
+  "name": "living_room",
+  "grid_size": [14, 11],
+  "layers": [
+    { "name": "Floor", "z_index": 0, "operations": [{ "type": "fill", "tile": "floor.wood.oak" }] },
+    { "name": "Frame", "z_index": 1, "operations": [{ "type": "frame", "top": "border.white.top", "bottom": "border.white.bottom", "left": "border.white.left", "right": "border.white.right" }] }
+  ],
+  "props": [
+    { "id": "prop.workstation.single", "at": [1, 1] },
+    { "id": "prop.workstation.double", "at": [3, 1] },
+    { "id": "prop.plant.tall", "at": [11, 1] },
+    { "id": "prop.sofa.gold", "at": [6, 2] },
+    { "id": "prop.rug.gray", "at": [6, 4], "z_index": 2 },
+    { "id": "prop.coffee_table", "at": [6, 4], "z_index": 3 },
+    { "id": "prop.chair.red", "at": [4, 5] },
+    { "id": "prop.chair.cream", "at": [10, 5] },
+    { "id": "prop.sideboard.flowers", "at": [1, 8] },
+    { "id": "prop.plant.bushy", "at": [12, 8] }
+  ]
+}
+
