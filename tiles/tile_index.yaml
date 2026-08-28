@@ -1,0 +1,43 @@
+# Authoritative vocabulary for agent-authored rooms. The generated TileSet is
+# only a Godot inspection/rendering artifact; edit this file, then sync.
+tile_size: [48, 48]
+
+sheets:
+  floors:
+    file: res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_subfiles_48x48/Room_Builder_Floors_48x48.png
+  borders:
+    file: res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_subfiles_48x48/Room_Builder_borders_48x48.png
+  walls:
+    file: res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_48x48.png
+
+tiles:
+  floor.wood.oak:
+    sheet: floors
+    atlas: [5, 13]
+    description: Warm oak plank floor.
+  border.white.top:
+    sheet: borders
+    atlas: [7, 6]
+    description: Thin cream horizontal room border.
+  border.white.bottom:
+    sheet: borders
+    atlas: [7, 6]
+    description: Thin cream horizontal room border.
+  border.white.left:
+    sheet: borders
+    atlas: [6, 7]
+    description: Simple cream vertical border for a room's left edge.
+  border.white.right:
+    sheet: borders
+    atlas: [8, 7]
+    description: Simple cream vertical border for a room's right edge.
+  wall.demo:
+    sheet: walls
+    atlas: [1, 37]
+    description: Vertical striped wooden wall paneling.
+
+props:
+  prop.plant.bushy:
+    texture: res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_Singles_48x48/2_Living_Room_Singles_48x48/Living_Room_Singles_48x48_18.png
+    anchor: top_left
+    description: Bushy potted plant.

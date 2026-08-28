@@ -1,0 +1,24 @@
+# A room layout is normal YAML. Coordinates are tile-grid positions.
+name: living_room
+grid_size: [14, 11]
+
+layers:
+  - name: Floor
+    z_index: 0
+    operations:
+      - type: fill
+        tile: floor.wood.oak
+  - name: Frame
+    z_index: 1
+    operations:
+      - type: frame
+        # top: border.white.top
+        top: wall.demo
+        bottom: border.white.bottom
+        left: border.white.left
+        right: border.white.right
+
+# Prop IDs are keys, so the layout only needs to state their placement.
+props:
+  prop.plant.bushy:
+    at: [12, 8]
