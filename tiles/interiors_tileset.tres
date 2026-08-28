@@ -1,72 +1,57 @@
 [gd_resource type="TileSet" format=3]
 
-[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_subfiles_48x48/Room_Builder_borders_48x48.png" id="1_y1qqo"]
-[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_subfiles_48x48/Room_Builder_Floors_48x48.png" id="2_auedi"]
-[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_Shadowless_48x48/1_Generic_Shadowless_48x48.png" id="3_ngvuy"]
-[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_48x48/1_Generic_48x48.png" id="4_kiuab"]
-[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_48x48.png" id="5_7cijq"]
+[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/16x16/Theme_Sorter/4_Bedroom_16x16.png" id="1_erwqk"]
+[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/16x16/Theme_Sorter/1_Generic_16x16.png" id="2_y1qqo"]
+[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/16x16/Theme_Sorter/2_LivingRoom_16x16.png" id="3_auedi"]
+[ext_resource type="Texture2D" path="res://assets/limezu-modern-interiors/1_Interiors/16x16/Room_Builder_16x16.png" id="4_ngvuy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kiuab"]
+resource_name = "bedroom"
+texture = ExtResource("1_erwqk")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7cijq"]
+resource_name = "generic"
+texture = ExtResource("2_y1qqo")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yyivx"]
-resource_name = "borders"
-texture = ExtResource("1_y1qqo")
-texture_region_size = Vector2i(48, 48)
-7:6/0 = 0
-7:6/0/custom_data_0 = "border.white.top | border.white.bottom"
-7:6/0/custom_data_1 = "Thin cream horizontal room border."
-6:7/0 = 0
-6:7/0/custom_data_0 = "border.white.left"
-6:7/0/custom_data_1 = "Simple cream vertical border for a room's left edge."
-8:7/0 = 0
-8:7/0/custom_data_0 = "border.white.right"
-8:7/0/custom_data_1 = "Simple cream vertical border for a room's right edge."
-6:8/0 = 0
-6:8/0/custom_data_0 = "border.corner.bottom_left"
-8:8/0 = 0
-8:8/0/custom_data_0 = "border.corner.bottom_right"
-6:6/0 = 0
-6:6/0/custom_data_0 = "border.corner.top_left"
-8:6/0 = 0
-8:6/0/custom_data_0 = "border.corner.top_right"
+resource_name = "living_room"
+texture = ExtResource("3_auedi")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oy0t5"]
-resource_name = "floors"
-texture = ExtResource("2_auedi")
-texture_region_size = Vector2i(48, 48)
-5:13/0 = 0
-5:13/0/custom_data_0 = "floor.wood.oak"
-5:13/0/custom_data_1 = "Warm oak plank floor."
-13:5/0 = 0
-13:5/0/custom_data_0 = "floor.checkered"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tsi7d"]
-resource_name = "furniture_generic"
-texture = ExtResource("3_ngvuy")
-texture_region_size = Vector2i(48, 48)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xbgea"]
-resource_name = "generic"
-texture = ExtResource("4_kiuab")
-texture_region_size = Vector2i(48, 48)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_46h2c"]
-resource_name = "walls"
-texture = ExtResource("5_7cijq")
-texture_region_size = Vector2i(48, 48)
+resource_name = "room"
+texture = ExtResource("4_ngvuy")
+35:22/0 = 0
+35:22/0/custom_data_0 = "floor.wood.oak"
+35:22/0/custom_data_1 = "Warm oak plank floor."
+47:14/0 = 0
+47:14/0/custom_data_0 = "floor.checkered"
+12:6/0 = 0
+12:6/0/custom_data_0 = "border.white.top"
+12:8/0 = 0
+12:8/0/custom_data_0 = "border.white.bottom"
+11:7/0 = 0
+11:7/0/custom_data_0 = "border.white.left"
+13:7/0 = 0
+13:7/0/custom_data_0 = "border.white.right"
+11:8/0 = 0
+11:8/0/custom_data_0 = "border.corner.bottom_left"
+13:8/0 = 0
+13:8/0/custom_data_0 = "border.corner.bottom_right"
+11:6/0 = 0
+11:6/0/custom_data_0 = "border.corner.top_left"
+13:6/0 = 0
+13:6/0/custom_data_0 = "border.corner.top_right"
 1:37/0 = 0
 1:37/0/custom_data_0 = "wall.wood.vertical.top"
-1:37/0/custom_data_1 = "Top half of a striped wooden back wall without side borders."
 1:38/0 = 0
 1:38/0/custom_data_0 = "wall.wood.vertical.bottom"
-1:38/0/custom_data_1 = "Bottom half of a striped wooden back wall without side borders."
 
 [resource]
-tile_size = Vector2i(48, 48)
 custom_data_layer_0/name = "semantic_id"
 custom_data_layer_0/type = 4
 custom_data_layer_1/name = "description"
 custom_data_layer_1/type = 4
-sources/0 = SubResource("TileSetAtlasSource_yyivx")
-sources/1 = SubResource("TileSetAtlasSource_oy0t5")
-sources/2 = SubResource("TileSetAtlasSource_tsi7d")
-sources/3 = SubResource("TileSetAtlasSource_xbgea")
-sources/4 = SubResource("TileSetAtlasSource_46h2c")
+sources/0 = SubResource("TileSetAtlasSource_kiuab")
+sources/1 = SubResource("TileSetAtlasSource_7cijq")
+sources/2 = SubResource("TileSetAtlasSource_yyivx")
+sources/3 = SubResource("TileSetAtlasSource_oy0t5")

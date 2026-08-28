@@ -94,7 +94,8 @@ props. The TileSet is generated output: browse it in Godot, but do not edit
 its metadata by hand.
 
 The **Atlas Picker** bottom panel is enabled with the project. Select a sheet,
-click any atlas cell, and it copies a YAML starter such as:
+use its +/- controls (or Ctrl + mouse wheel) to zoom, and click any gridded
+atlas cell to copy a YAML starter such as:
 
 ```yaml
 new.tile.id:
