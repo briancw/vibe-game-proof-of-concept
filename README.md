@@ -27,6 +27,51 @@ props:
     z_index: 2
 ```
 
+Room edges use a `frame` operation. Its four straight-edge tile IDs apply
+inside the corners, while the four corner tile IDs fill the outer cells:
+
+```yaml
+- type: frame
+  top: border.white.top
+  bottom: border.white.bottom
+  left: border.white.left
+  right: border.white.right
+  top_left: border.corner.top_left
+  top_right: border.corner.top_right
+  bottom_left: border.corner.bottom_left
+  bottom_right: border.corner.bottom_right
+```
+
+For a taller back wall, replace `top` with `top_rows`. Rows are listed from
+the outer/topmost row to the row nearest the floor; the frame automatically
+moves the top corners up and continues its side edges beside each extra row.
+
+```yaml
+top_rows:
+  - wall.wood.vertical.top
+  - wall.wood.vertical.bottom
+```
+
+Props use an explicit visual anchor. `bottom_left` makes `at: [x, y]` the
+bottom-left of the visible artwork at the lower edge of that floor cell,
+automatically extending furniture upward regardless of its texture dimensions
+or transparent padding. `bottom_center` uses the same vertical convention but
+centers the visible artwork in the authored column; use it for narrow props
+such as tables, lamps, or posts.
+
+Props can reference either a standalone image or a region on any indexed
+sheet. `atlas` and optional `size` use tile-grid units; `size` defaults to one
+cell in each direction.
+
+```yaml
+prop.chair.right:
+  sheet: generic
+  atlas: [4, 10]
+  size: [1, 2]
+  anchor: bottom_center
+```
+
+
 The renderer validates the room shape after parsing (room name, grid size,
 layers, and prop structure) before building the scene. The vendored parser and
 its exact upstream commit are recorded in `addons/yaml_dot_gd/UPSTREAM.md`.

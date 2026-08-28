@@ -30,7 +30,7 @@ func _initialize() -> void:
 		if layout.is_empty():
 			quit(1)
 			return
-		var root := _build_room(layout, tiles, index.props)
+		var root := _build_room(layout, tiles, index.props, index.sheets)
 		var output_path := "%s/%s_debug.tscn" % [OUTPUT_DIR, filename.get_basename()]
 		var packed := PackedScene.new()
 		var error := packed.pack(root)
@@ -44,7 +44,7 @@ func _initialize() -> void:
 	quit()
 
 
-func _build_room(layout: Dictionary, tiles: Dictionary, prop_definitions: Dictionary) -> Node2D:
+func _build_room(layout: Dictionary, tiles: Dictionary, prop_definitions: Dictionary, sheets: Dictionary) -> Node2D:
 	var root := Node2D.new()
 	root.name = "%sDebug" % String(layout.get("name", "Room")).replace(" ", "")
 	root.set_meta("source_layout", layout)
@@ -56,7 +56,7 @@ func _build_room(layout: Dictionary, tiles: Dictionary, prop_definitions: Dictio
 		root.add_child(layer)
 		layer.owner = root
 		_build_layer(layer, layer_data, _as_vector(layout.get("grid_size", [])), tiles)
-	_build_props(root, layout.get("props", []), prop_definitions)
+	_build_props(root, layout.get("props", []), prop_definitions, sheets)
 	return root
 
 
@@ -68,12 +68,19 @@ func _build_layer(layer: TileMapLayer, layer_data: Dictionary, grid_size: Vector
 					for x in grid_size.x:
 						_place(layer, Vector2i(x, y), operation.get("tile", ""), tiles)
 			"frame":
-				for x in range(-1, grid_size.x + 1):
-					_place(layer, Vector2i(x, -1), operation.get("top", ""), tiles)
+				var top_rows: Array = operation.get("top_rows", [operation.get("top", "")])
+				for row in range(top_rows.size()):
+					for x in range(grid_size.x):
+						_place(layer, Vector2i(x, row - top_rows.size()), top_rows[row], tiles)
+				for x in range(grid_size.x):
 					_place(layer, Vector2i(x, grid_size.y), operation.get("bottom", ""), tiles)
-				for y in grid_size.y:
+				for y in range(-top_rows.size() + 1, grid_size.y):
 					_place(layer, Vector2i(-1, y), operation.get("left", ""), tiles)
 					_place(layer, Vector2i(grid_size.x, y), operation.get("right", ""), tiles)
+				_place(layer, Vector2i(-1, -top_rows.size()), operation.get("top_left", ""), tiles)
+				_place(layer, Vector2i(grid_size.x, -top_rows.size()), operation.get("top_right", ""), tiles)
+				_place(layer, Vector2i(-1, grid_size.y), operation.get("bottom_left", ""), tiles)
+				_place(layer, Vector2i(grid_size.x, grid_size.y), operation.get("bottom_right", ""), tiles)
 
 
 func _place(layer: TileMapLayer, cell: Vector2i, semantic_id: String, tiles: Dictionary) -> void:
@@ -84,7 +91,7 @@ func _place(layer: TileMapLayer, cell: Vector2i, semantic_id: String, tiles: Dic
 	layer.set_cell(cell, tile.source_id, tile.atlas_coords, tile.alternative_id)
 
 
-func _build_props(root: Node2D, placements: Array, definitions: Dictionary) -> void:
+func _build_props(root: Node2D, placements: Array, definitions: Dictionary, sheets: Dictionary) -> void:
 	var props := Node2D.new()
 	props.name = "Props"
 	root.add_child(props)
@@ -96,12 +103,44 @@ func _build_props(root: Node2D, placements: Array, definitions: Dictionary) -> v
 			continue
 		var sprite := Sprite2D.new()
 		sprite.name = String(placement.get("id", "Prop")).replace(".", "_")
-		sprite.texture = load(definition.get("texture", ""))
-		sprite.centered = definition.get("anchor", "top_left") != "top_left"
+		sprite.texture = _prop_texture(definition, sheets, TILE_SET.tile_size)
+		var anchor: String = definition.get("anchor", "bottom_left")
+		_apply_prop_anchor(sprite, anchor)
 		sprite.position = _as_vector(placement.get("at", [])) * TILE_SET.tile_size
+		if anchor.begins_with("bottom_"):
+			sprite.position.y += TILE_SET.tile_size.y
 		sprite.z_index = int(placement.get("z_index", 2))
 		props.add_child(sprite)
 		sprite.owner = root
+
+
+func _prop_texture(definition: Dictionary, sheets: Dictionary, tile_size: Vector2i) -> Texture2D:
+	if definition.has("texture"):
+		return load(definition.texture)
+	var atlas_texture := AtlasTexture.new()
+	atlas_texture.atlas = load(sheets[definition.sheet].file)
+	var atlas := _as_vector(definition.get("atlas", []))
+	var size := _as_vector(definition.get("size", [1, 1]))
+	atlas_texture.region = Rect2(Vector2(atlas * tile_size), Vector2(size * tile_size))
+	return atlas_texture
+
+
+func _apply_prop_anchor(sprite: Sprite2D, anchor: String) -> void:
+	sprite.centered = false
+	match anchor:
+		"top_left":
+			sprite.offset = Vector2.ZERO
+		"bottom_left": # Align to the lower edge of the authored floor cell.
+			var used_rect := sprite.texture.get_image().get_used_rect()
+			sprite.offset = Vector2(-used_rect.position.x, -used_rect.position.y - used_rect.size.y)
+		"bottom_center": # Center the visible artwork in the authored floor cell.
+			var used_rect := sprite.texture.get_image().get_used_rect()
+			sprite.offset = Vector2(
+				TILE_SET.tile_size.x * 0.5 - used_rect.position.x - used_rect.size.x * 0.5,
+				-used_rect.position.y - used_rect.size.y
+			)
+		_:
+			push_error("Unknown prop anchor: %s" % anchor)
 
 
 func _read_json(path: String) -> Dictionary:

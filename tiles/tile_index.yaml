@@ -1,5 +1,5 @@
-# Authoritative vocabulary for agent-authored rooms. The generated TileSet is
-# only a Godot inspection/rendering artifact; edit this file, then sync.
+# Authoritative vocabulary for agent-authored rooms.
+# The generated TileSet is only a Godot inspection/rendering artifact; edit this file, then sync.
 tile_size: [48, 48]
 
 sheets:
@@ -9,12 +9,19 @@ sheets:
     file: res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_subfiles_48x48/Room_Builder_borders_48x48.png
   walls:
     file: res://assets/limezu-modern-interiors/1_Interiors/48x48/Room_Builder_48x48.png
+  generic:
+    file: res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_48x48/1_Generic_48x48.png
+  furniture_generic:
+    file: res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_Shadowless_48x48/1_Generic_Shadowless_48x48.png
 
 tiles:
   floor.wood.oak:
     sheet: floors
     atlas: [5, 13]
     description: Warm oak plank floor.
+  floor.checkered:
+    sheet: floors
+    atlas: [13, 5]
   border.white.top:
     sheet: borders
     atlas: [7, 6]
@@ -31,13 +38,40 @@ tiles:
     sheet: borders
     atlas: [8, 7]
     description: Simple cream vertical border for a room's right edge.
-  wall.demo:
+  border.corner.bottom_left:
+    sheet: borders
+    atlas: [6, 8]
+  border.corner.bottom_right:
+    sheet: borders
+    atlas: [8, 8]
+  border.corner.top_left:
+    sheet: borders
+    atlas: [6, 6]
+  border.corner.top_right:
+    sheet: borders
+    atlas: [8, 6]
+  wall.wood.vertical.top:
     sheet: walls
     atlas: [1, 37]
-    description: Vertical striped wooden wall paneling.
+    description: Top half of a striped wooden back wall without side borders.
+  wall.wood.vertical.bottom:
+    sheet: walls
+    atlas: [1, 38]
+    description: Bottom half of a striped wooden back wall without side borders.
 
 props:
   prop.plant.bushy:
     texture: res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_Singles_48x48/2_Living_Room_Singles_48x48/Living_Room_Singles_48x48_18.png
-    anchor: top_left
+    anchor: bottom_center
     description: Bushy potted plant.
+  prop.bed.single:
+    texture: res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_Singles_48x48/4_Bedroom_Singles_48x48/Bedroom_Singles_48x48_110.png
+    anchor: bottom_left
+  prop.side_table:
+    texture: res://assets/limezu-modern-interiors/1_Interiors/48x48/Theme_Sorter_Singles_48x48/4_Bedroom_Singles_48x48/Bedroom_Singles_48x48_432.png
+    anchor: bottom_center
+  prop.chair.right:
+    sheet: generic
+    atlas: [9, 50]
+    size: [1, 2]
+    anchor: bottom_center

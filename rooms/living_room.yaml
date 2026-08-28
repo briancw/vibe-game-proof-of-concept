@@ -7,18 +7,29 @@ layers:
     z_index: 0
     operations:
       - type: fill
-        tile: floor.wood.oak
+        tile: floor.checkered
   - name: Frame
     z_index: 1
     operations:
       - type: frame
-        # top: border.white.top
-        top: wall.demo
+        top_rows:
+          - wall.wood.vertical.top
+          - wall.wood.vertical.bottom
         bottom: border.white.bottom
         left: border.white.left
         right: border.white.right
+        top_left: border.corner.top_left
+        top_right: border.corner.top_right
+        bottom_left: border.corner.bottom_left
+        bottom_right: border.corner.bottom_right
 
 # Prop IDs are keys, so the layout only needs to state their placement.
 props:
   prop.plant.bushy:
-    at: [12, 8]
+    at: [4, 4]
+  prop.bed.single:
+    at: [0, 0]
+  prop.side_table:
+    at: [4, 0]
+  prop.chair.right:
+    at: [6, 0]

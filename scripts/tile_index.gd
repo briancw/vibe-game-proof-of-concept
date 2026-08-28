@@ -72,8 +72,22 @@ static func _validate_and_resolve(raw: Dictionary, path: String) -> Dictionary:
 		reverse_addresses[address_key].append(tile_id)
 	for prop_id in result.props:
 		var prop: Dictionary = result.props[prop_id]
-		if not prop.get("texture") is String or String(prop.texture).is_empty() or not ResourceLoader.exists(prop.texture):
-			push_error("Prop %s needs an existing texture path: %s" % [prop_id, path])
+		var texture_path := String(prop.get("texture", ""))
+		var sheet_name := String(prop.get("sheet", ""))
+		if not texture_path.is_empty():
+			if not sheet_name.is_empty() or not ResourceLoader.exists(texture_path):
+				push_error("Prop %s needs one existing texture or sheet source: %s" % [prop_id, path])
+				return {}
+			continue
+		var atlas := _as_vector(prop.get("atlas", []))
+		var size := _as_vector(prop.get("size", [1, 1]))
+		if not source_ids.has(sheet_name) or atlas.x < 0 or atlas.y < 0 or size.x <= 0 or size.y <= 0:
+			push_error("Prop %s needs an existing texture or known sheet, atlas, and positive size: %s" % [prop_id, path])
+			return {}
+		var sheet_texture: Texture2D = load(result.sheets[sheet_name].file)
+		var sheet_grid := Vector2i(sheet_texture.get_size()) / tile_size
+		if atlas.x + size.x > sheet_grid.x or atlas.y + size.y > sheet_grid.y:
+			push_error("Prop %s region lies outside sheet %s: %s" % [prop_id, sheet_name, path])
 			return {}
 	result["tile_size_vector"] = tile_size
 	result["source_ids"] = source_ids
