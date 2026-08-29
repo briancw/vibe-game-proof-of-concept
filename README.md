@@ -104,6 +104,22 @@ the reusable `scenes/player.tscn`; replace only its `PlaceholderVisual` child
 when character artwork is ready. Furniture is currently visual-only and does
 not yet block movement.
 
+## Character lab
+
+`scenes/character_lab.tscn` is an isolated visual test bench for the dynamic
+character experiment. It does not replace the game entry scene. The first pass
+draws separate procedural skin, hair, clothing, arm, and leg layers from a
+real `Skeleton2D` rest pose. A named pelvis/spine/chest/neck/limb hierarchy
+is the source of the shape anchors, so the generated figure-eight torso and
+limbs are ready for bone pose animation and later `Polygon2D` skinning.
+Its sliders currently drive height, weight, hips, bust, skin tone, and an
+outfit colourway; **Next Preset** (or Space) cycles deliberately different
+body studies.
+
+Run `scripts/capture_character_lab.sh` to render the lab through Godot and
+write `artifacts/screenshots/character_lab.png`. This gives the character work
+its own repeatable capture artifact without perturbing room captures.
+
 ## Tile authoring and inspection
 
 Edit `tiles/tile_index.yaml` to add, rename, or remove available tiles and

@@ -1,0 +1,268 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_lab.gd" id="1_lab"]
+[ext_resource type="Script" path="res://scripts/character_preview.gd" id="2_preview"]
+
+[node name="CharacterLab" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="CharacterPreview" type="Node2D" parent="."]
+position = Vector2(86, 193)
+scale = Vector2(2, 2)
+script = ExtResource("2_preview")
+height = 0.1375
+weight = 0.125
+hip_width = 0.145
+bust_size = 0.125
+skin_tone = 0.12
+outfit_index = 1
+
+[node name="Skeleton2D" type="Skeleton2D" parent="CharacterPreview"]
+
+[node name="Pelvis" type="Bone2D" parent="CharacterPreview/Skeleton2D"]
+position = Vector2(0, -18)
+rest = Transform2D(1, 0, 0, 1, 0, -18)
+
+[node name="Spine" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis"]
+position = Vector2(0, -12)
+rest = Transform2D(1, 0, 0, 1, 0, -12)
+
+[node name="Chest" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine"]
+position = Vector2(0, -12)
+rest = Transform2D(1, 0, 0, 1, 0, -12)
+
+[node name="Head" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest"]
+position = Vector2(0, -15)
+rest = Transform2D(1, 0, 0, 1, 0, -15)
+auto_calculate = false
+length = 8.0
+
+[node name="UpperArmLeft" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest"]
+position = Vector2(-15, 1)
+rest = Transform2D(1, 0, 0, 1, -15, 1)
+
+[node name="ForearmLeft" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmLeft"]
+position = Vector2(-3, 12)
+rest = Transform2D(1, 0, 0, 1, -3, 12)
+
+[node name="HandLeft" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmLeft/ForearmLeft"]
+position = Vector2(-1, 12)
+rest = Transform2D(1, 0, 0, 1, -1, 12)
+auto_calculate = false
+length = 5.0
+
+[node name="UpperArmRight" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest"]
+position = Vector2(15, 1)
+rest = Transform2D(1, 0, 0, 1, 15, 1)
+
+[node name="ForearmRight" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmRight"]
+position = Vector2(3, 12)
+rest = Transform2D(1, 0, 0, 1, 3, 12)
+
+[node name="HandRight" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmRight/ForearmRight"]
+position = Vector2(1, 12)
+rest = Transform2D(1, 0, 0, 1, 1, 12)
+auto_calculate = false
+length = 5.0
+
+[node name="ThighLeft" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis"]
+position = Vector2(-4, 1)
+rest = Transform2D(1, 0, 0, 1, -4, 1)
+
+[node name="ShinLeft" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/ThighLeft"]
+position = Vector2(-1, 10)
+rest = Transform2D(1, 0, 0, 1, -1, 10)
+
+[node name="FootLeft" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/ThighLeft/ShinLeft"]
+position = Vector2(-1, 11)
+rest = Transform2D(1, 0, 0, 1, -1, 11)
+auto_calculate = false
+length = 6.0
+
+[node name="ThighRight" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis"]
+position = Vector2(4, 1)
+rest = Transform2D(1, 0, 0, 1, 4, 1)
+
+[node name="ShinRight" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/ThighRight"]
+position = Vector2(1, 10)
+rest = Transform2D(1, 0, 0, 1, 1, 10)
+
+[node name="FootRight" type="Bone2D" parent="CharacterPreview/Skeleton2D/Pelvis/ThighRight/ShinRight"]
+position = Vector2(1, 11)
+rest = Transform2D(1, 0, 0, 1, 1, 11)
+auto_calculate = false
+length = 6.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ControlPanel" type="ColorRect" parent="UI"]
+offset_left = 172.0
+offset_top = 28.0
+offset_right = 308.0
+offset_bottom = 226.0
+color = Color(0.12549, 0.145098, 0.203922, 0.96)
+
+[node name="PanelBorder" type="ReferenceRect" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 198.0
+border_color = Color(0.27451, 0.313726, 0.392157, 1)
+border_width = 1.0
+
+[node name="ControlsHeading" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 124.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.905882, 0.87451, 0.815686, 1)
+theme_override_font_sizes/font_size = 7
+text = "PARAMETRIC CONTROLS"
+
+[node name="PresetLabel" type="Label" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 124.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.560784, 0.627451, 0.713725, 1)
+theme_override_font_sizes/font_size = 7
+text = "PRESET 01 / 03"
+
+[node name="HeightLabel" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 43.0
+offset_right = 64.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
+theme_override_font_sizes/font_size = 8
+text = "HEIGHT"
+
+[node name="HeightSlider" type="HSlider" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 43.0
+offset_right = 122.0
+offset_bottom = 55.0
+max_value = 0.25
+step = 0.0125
+value = 0.1375
+
+[node name="WeightLabel" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 66.0
+offset_right = 64.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
+theme_override_font_sizes/font_size = 8
+text = "WEIGHT"
+
+[node name="WeightSlider" type="HSlider" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 66.0
+offset_right = 122.0
+offset_bottom = 78.0
+max_value = 0.25
+step = 0.0125
+value = 0.125
+
+[node name="HipsLabel" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 89.0
+offset_right = 64.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
+theme_override_font_sizes/font_size = 8
+text = "HIPS"
+
+[node name="HipSlider" type="HSlider" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 89.0
+offset_right = 122.0
+offset_bottom = 101.0
+max_value = 0.25
+step = 0.0125
+value = 0.145
+
+[node name="BustLabel" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 112.0
+offset_right = 64.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
+theme_override_font_sizes/font_size = 8
+text = "BUST"
+
+[node name="BustSlider" type="HSlider" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 112.0
+offset_right = 122.0
+offset_bottom = 124.0
+max_value = 0.25
+step = 0.0125
+value = 0.125
+
+[node name="SkinLabel" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 135.0
+offset_right = 64.0
+offset_bottom = 147.0
+theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
+theme_override_font_sizes/font_size = 8
+text = "SKIN"
+
+[node name="SkinSlider" type="HSlider" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 135.0
+offset_right = 122.0
+offset_bottom = 147.0
+max_value = 0.25
+step = 0.0125
+value = 0.12
+
+[node name="OutfitLabel" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 158.0
+offset_right = 64.0
+offset_bottom = 170.0
+theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
+theme_override_font_sizes/font_size = 8
+text = "OUTFIT"
+
+[node name="OutfitSlider" type="HSlider" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 158.0
+offset_right = 122.0
+offset_bottom = 170.0
+max_value = 2.0
+step = 1.0
+value = 1.0
+
+[node name="PresetButton" type="Button" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 178.0
+offset_right = 122.0
+offset_bottom = 193.0
+theme_override_colors/font_color = Color(0.858824, 0.831373, 0.768627, 1)
+theme_override_font_sizes/font_size = 7
+text = "NEXT PRESET  [SPACE]"
