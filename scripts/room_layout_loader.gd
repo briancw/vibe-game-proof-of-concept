@@ -54,6 +54,9 @@ static func _validate_and_normalize(layout: Dictionary, path: String) -> Diction
 	if not result.get("grid_size") is Array or result.grid_size.size() != 2:
 		push_error("Room requires grid_size: [width, height]: %s" % path)
 		return {}
+	if result.has("player_start") and (not result.player_start is Array or result.player_start.size() != 2):
+		push_error("Room player_start must be [x, y]: %s" % path)
+		return {}
 	if not result.get("layers") is Array:
 		push_error("Room requires layers as a YAML list: %s" % path)
 		return {}

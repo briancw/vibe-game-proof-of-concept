@@ -27,6 +27,14 @@ props:
     z_index: 2
 ```
 
+Set `player_start` to choose the player's starting tile. Coordinates are
+zero-based cells and resolve to the center of the tile, so with this project's
+16×16 tiles `[7, 9]` becomes world position `(120, 152)`:
+
+```yaml
+player_start: [7, 9]
+```
+
 Room edges use a `frame` operation. Its four straight-edge tile IDs apply
 inside the corners, while the four corner tile IDs fill the outer cells:
 
@@ -86,6 +94,15 @@ is still the safest room-authoring path.
 Open `project.godot` and select `editor_room.tscn` to inspect the generated
 room. To capture it, run `scripts/capture_screenshots.sh`; it writes
 `artifacts/screenshots/room.png`.
+
+## Player prototype
+
+Run the project to control the temporary red-circle player with **WASD** or
+the **arrow keys**. Movement is smooth, eight-directional, normalized on
+diagonals, and blocked at the authored room's floor boundary. The player uses
+the reusable `scenes/player.tscn`; replace only its `PlaceholderVisual` child
+when character artwork is ready. Furniture is currently visual-only and does
+not yet block movement.
 
 ## Tile authoring and inspection
 

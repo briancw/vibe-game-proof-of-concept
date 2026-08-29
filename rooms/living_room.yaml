@@ -1,6 +1,8 @@
 # A room layout is normal YAML. Coordinates are tile-grid positions.
 name: living_room
 grid_size: [14, 11]
+# Tile-grid coordinate. The player spawns at this cell's visual center.
+player_start: [7, 10]
 
 layers:
   - name: Floor

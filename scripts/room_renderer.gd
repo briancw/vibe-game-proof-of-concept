@@ -40,11 +40,24 @@ func rebuild_room() -> void:
 	if grid_size.x <= 0 or grid_size.y <= 0 or tile_size.x <= 0 or tile_size.y <= 0:
 		push_error("Room layout needs positive grid_size and tile_size values.")
 		return
+	_place_player(layout, grid_size, tile_size)
 
 	var tiles: Dictionary = index.tiles_by_id
 	for layer_data in layout.get("layers", []):
 		_build_tile_layer(layer_data, tiles, grid_size)
 	_build_props(layout.get("props", []), index.props, index.sheets, tile_size)
+	_build_room_boundaries(grid_size, tile_size)
+
+
+func _place_player(layout: Dictionary, grid_size: Vector2i, tile_size: Vector2i) -> void:
+	var player := get_node_or_null("Player") as CharacterBody2D
+	if player == null or not layout.has("player_start"):
+		return
+	var start_cell := _as_vector(layout.player_start)
+	if start_cell.x < 0 or start_cell.y < 0 or start_cell.x >= grid_size.x or start_cell.y >= grid_size.y:
+		push_error("Room player_start must be inside grid_size.")
+		return
+	player.position = (Vector2(start_cell) + Vector2(0.5, 0.5)) * Vector2(tile_size)
 
 
 func _read_json(path: String) -> Dictionary:
@@ -112,6 +125,33 @@ func _build_props(prop_data: Array, definitions: Dictionary, sheets: Dictionary,
 		props.add_child(sprite)
 
 
+func _build_room_boundaries(grid_size: Vector2i, tile_size: Vector2i) -> void:
+	# Keep the player within the authored floor. Furniture collision will be
+	# added with prop metadata later; this only supplies the room perimeter.
+	var boundaries := StaticBody2D.new()
+	boundaries.name = "RoomBoundaries"
+	boundaries.collision_layer = 1
+	boundaries.collision_mask = 1
+	_generated.add_child(boundaries)
+
+	var width := float(grid_size.x * tile_size.x)
+	var height := float(grid_size.y * tile_size.y)
+	var thickness := float(tile_size.x)
+	_add_boundary(boundaries, Vector2(width * 0.5, -thickness * 0.5), Vector2(width + thickness * 2.0, thickness))
+	_add_boundary(boundaries, Vector2(width * 0.5, height + thickness * 0.5), Vector2(width + thickness * 2.0, thickness))
+	_add_boundary(boundaries, Vector2(-thickness * 0.5, height * 0.5), Vector2(thickness, height))
+	_add_boundary(boundaries, Vector2(width + thickness * 0.5, height * 0.5), Vector2(thickness, height))
+
+
+func _add_boundary(parent: StaticBody2D, position: Vector2, size: Vector2) -> void:
+	var collision := CollisionShape2D.new()
+	var shape := RectangleShape2D.new()
+	shape.size = size
+	collision.shape = shape
+	collision.position = position
+	parent.add_child(collision)
+
+
 func _prop_texture(definition: Dictionary, sheets: Dictionary, tile_size: Vector2i) -> Texture2D:
 	if definition.has("texture"):
 		return load(definition.texture)
@@ -152,6 +192,9 @@ func capture_screenshot() -> void:
 	var tile_size := TILE_SET.tile_size
 	var grid_size := _as_vector(layout.get("grid_size", []))
 	var top_frame_height := _top_frame_height(layout)
+	var player_camera := get_node_or_null("Player/Camera2D") as Camera2D
+	if player_camera != null:
+		player_camera.enabled = false
 	var camera := Camera2D.new()
 	var top_left := Vector2(-tile_size.x, -top_frame_height * tile_size.y)
 	var bottom_right := Vector2((grid_size.x + 1) * tile_size.x, (grid_size.y + 1) * tile_size.y)
