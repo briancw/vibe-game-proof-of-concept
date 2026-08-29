@@ -1,0 +1,31 @@
+name: character_corner
+grid_size: [3, 4]
+
+layers:
+  - name: Floor
+    z_index: 0
+    operations:
+      - type: fill
+        tile: floor.wood.oak
+  - name: Frame
+    z_index: 1
+    operations:
+      - type: frame
+        top_rows:
+          - wall.wood.vertical.top
+          - wall.wood.vertical.bottom
+        bottom: border.white.bottom
+        left: border.white.left
+        right: border.white.right
+        top_left: border.corner.top_left
+        top_right: border.corner.top_right
+        bottom_left: border.corner.bottom_left
+        bottom_right: border.corner.bottom_right
+
+props:
+  prop.plant.bushy:
+    at: [0, 3]
+    z_index: 2
+  prop.side_table:
+    at: [2, 3]
+    z_index: 2

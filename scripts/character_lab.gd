@@ -12,13 +12,16 @@ extends Node2D
 @onready var bust_slider: HSlider = %BustSlider
 @onready var skin_slider: HSlider = %SkinSlider
 @onready var outfit_slider: HSlider = %OutfitSlider
+@onready var hair_slider: HSlider = %HairSlider
+@onready var hair_color_slider: HSlider = %HairColorSlider
+@onready var eyes_slider: HSlider = %EyesSlider
 @onready var preset_label: Label = %PresetLabel
 
 var _preset_index := 0
 var _presets := [
-	{"height": 0.08, "weight": 0.0625, "hips": 0.075, "bust": 0.0375, "skin": 0.055, "outfit": 0},
-	{"height": 0.1375, "weight": 0.125, "hips": 0.145, "bust": 0.125, "skin": 0.12, "outfit": 1},
-	{"height": 0.205, "weight": 0.18, "hips": 0.195, "bust": 0.18, "skin": 0.195, "outfit": 2},
+	{"height": 0.08, "weight": 0.0625, "hips": 0.075, "bust": 0.0375, "skin": 0.055, "outfit": 0, "hair": 0, "hair_color": 1, "eyes": 0},
+	{"height": 0.1375, "weight": 0.125, "hips": 0.145, "bust": 0.125, "skin": 0.12, "outfit": 1, "hair": 1, "hair_color": 3, "eyes": 1},
+	{"height": 0.205, "weight": 0.18, "hips": 0.195, "bust": 0.18, "skin": 0.195, "outfit": 2, "hair": 3, "hair_color": 0, "eyes": 2},
 ]
 
 
@@ -32,6 +35,9 @@ func _ready() -> void:
 	bust_slider.value_changed.connect(_on_bust_changed)
 	skin_slider.value_changed.connect(_on_skin_changed)
 	outfit_slider.value_changed.connect(_on_outfit_changed)
+	hair_slider.value_changed.connect(_on_hair_changed)
+	hair_color_slider.value_changed.connect(_on_hair_color_changed)
+	eyes_slider.value_changed.connect(_on_eyes_changed)
 	%PresetButton.pressed.connect(_cycle_preset)
 	_apply_slider_values()
 	if "--capture" in OS.get_cmdline_user_args():
@@ -69,6 +75,18 @@ func _on_outfit_changed(value: float) -> void:
 	preview.outfit_index = int(value)
 
 
+func _on_hair_changed(value: float) -> void:
+	preview.hair_index = int(value)
+
+
+func _on_hair_color_changed(value: float) -> void:
+	preview.hair_color_index = int(value)
+
+
+func _on_eyes_changed(value: float) -> void:
+	preview.eye_index = int(value)
+
+
 func _cycle_preset() -> void:
 	_preset_index = (_preset_index + 1) % _presets.size()
 	var preset: Dictionary = _presets[_preset_index]
@@ -78,6 +96,9 @@ func _cycle_preset() -> void:
 	bust_slider.value = preset.bust
 	skin_slider.value = preset.skin
 	outfit_slider.value = preset.outfit
+	hair_slider.value = preset.hair
+	hair_color_slider.value = preset.hair_color
+	eyes_slider.value = preset.eyes
 	preset_label.text = "PRESET 0%d / 03" % (_preset_index + 1)
 
 
@@ -88,6 +109,9 @@ func _apply_slider_values() -> void:
 	_on_bust_changed(bust_slider.value)
 	_on_skin_changed(skin_slider.value)
 	_on_outfit_changed(outfit_slider.value)
+	_on_hair_changed(hair_slider.value)
+	_on_hair_color_changed(hair_color_slider.value)
+	_on_eyes_changed(eyes_slider.value)
 
 
 func _draw() -> void:

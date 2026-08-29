@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_room_lab.gd" id="1_lab"]
+[ext_resource type="Script" path="res://scripts/room_renderer.gd" id="2_room"]
+[ext_resource type="PackedScene" path="res://scenes/character_preview.tscn" id="3_character"]
+[ext_resource type="Shader" path="res://shaders/character_scene_blend.gdshader" id="4_blend"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blend"]
+shader = ExtResource("4_blend")
+shader_parameter/environment_strength = 0.08
+shader_parameter/desaturation = 0.01
+
+[node name="CharacterRoomLab" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="Room" type="Node2D" parent="."]
+script = ExtResource("2_room")
+layout_path = "res://rooms/character_corner.yaml"
+
+[node name="AmbientPalette" type="CanvasModulate" parent="."]
+color = Color(0.94, 0.91, 0.88, 1)
+
+[node name="Character" parent="." instance=ExtResource("3_character")]
+position = Vector2(24, 59)
+z_index = 3
+material = SubResource("ShaderMaterial_blend")
+height = 0.1375
+weight = 0.125
+hip_width = 0.145
+bust_size = 0.125
+skin_tone = 0.115
+outfit_index = 0
+hair_index = 1
+hair_color_index = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(24, 24)
+zoom = Vector2(2, 2)

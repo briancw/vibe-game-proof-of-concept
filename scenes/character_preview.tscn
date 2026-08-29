@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_preview.gd" id="1_preview"]
+
+[node name="CharacterPreview" type="Node2D"]
+script = ExtResource("1_preview")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Pelvis" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(0, -18)
+rest = Transform2D(1, 0, 0, 1, 0, -18)
+
+[node name="Spine" type="Bone2D" parent="Skeleton2D/Pelvis"]
+position = Vector2(0, -12)
+rest = Transform2D(1, 0, 0, 1, 0, -12)
+
+[node name="Chest" type="Bone2D" parent="Skeleton2D/Pelvis/Spine"]
+position = Vector2(0, -12)
+rest = Transform2D(1, 0, 0, 1, 0, -12)
+
+[node name="Head" type="Bone2D" parent="Skeleton2D/Pelvis/Spine/Chest"]
+position = Vector2(0, -15)
+rest = Transform2D(1, 0, 0, 1, 0, -15)
+auto_calculate = false
+length = 8.0
+
+[node name="UpperArmLeft" type="Bone2D" parent="Skeleton2D/Pelvis/Spine/Chest"]
+position = Vector2(-15, 1)
+rest = Transform2D(1, 0, 0, 1, -15, 1)
+
+[node name="ForearmLeft" type="Bone2D" parent="Skeleton2D/Pelvis/Spine/Chest/UpperArmLeft"]
+position = Vector2(-3, 12)
+rest = Transform2D(1, 0, 0, 1, -3, 12)
+
+[node name="HandLeft" type="Bone2D" parent="Skeleton2D/Pelvis/Spine/Chest/UpperArmLeft/ForearmLeft"]
+position = Vector2(-1, 12)
+rest = Transform2D(1, 0, 0, 1, -1, 12)
+auto_calculate = false
+length = 5.0
+
+[node name="UpperArmRight" type="Bone2D" parent="Skeleton2D/Pelvis/Spine/Chest"]
+position = Vector2(15, 1)
+rest = Transform2D(1, 0, 0, 1, 15, 1)
+
+[node name="ForearmRight" type="Bone2D" parent="Skeleton2D/Pelvis/Spine/Chest/UpperArmRight"]
+position = Vector2(3, 12)
+rest = Transform2D(1, 0, 0, 1, 3, 12)
+
+[node name="HandRight" type="Bone2D" parent="Skeleton2D/Pelvis/Spine/Chest/UpperArmRight/ForearmRight"]
+position = Vector2(1, 12)
+rest = Transform2D(1, 0, 0, 1, 1, 12)
+auto_calculate = false
+length = 5.0
+
+[node name="ThighLeft" type="Bone2D" parent="Skeleton2D/Pelvis"]
+position = Vector2(-4, 1)
+rest = Transform2D(1, 0, 0, 1, -4, 1)
+
+[node name="ShinLeft" type="Bone2D" parent="Skeleton2D/Pelvis/ThighLeft"]
+position = Vector2(-1, 10)
+rest = Transform2D(1, 0, 0, 1, -1, 10)
+
+[node name="FootLeft" type="Bone2D" parent="Skeleton2D/Pelvis/ThighLeft/ShinLeft"]
+position = Vector2(-1, 11)
+rest = Transform2D(1, 0, 0, 1, -1, 11)
+auto_calculate = false
+length = 6.0
+
+[node name="ThighRight" type="Bone2D" parent="Skeleton2D/Pelvis"]
+position = Vector2(4, 1)
+rest = Transform2D(1, 0, 0, 1, 4, 1)
+
+[node name="ShinRight" type="Bone2D" parent="Skeleton2D/Pelvis/ThighRight"]
+position = Vector2(1, 10)
+rest = Transform2D(1, 0, 0, 1, 1, 10)
+
+[node name="FootRight" type="Bone2D" parent="Skeleton2D/Pelvis/ThighRight/ShinRight"]
+position = Vector2(1, 11)
+rest = Transform2D(1, 0, 0, 1, 1, 11)
+auto_calculate = false
+length = 6.0
