@@ -1,40 +1,55 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" uid="uid://cboafkftpu3lb" path="res://character-v2/labs/rig_lab_v2.gd" id="1_lab"]
-[ext_resource type="PackedScene" path="res://character-v2/character_rig_v2.tscn" id="2_rig"]
-[ext_resource type="PackedScene" path="res://character-v2/character_rig_v2_side.tscn" id="3_side"]
-[ext_resource type="PackedScene" path="res://character-v2/outfits/casual.tscn" id="4_casual"]
+[ext_resource type="PackedScene" path="res://character-v2/variants/masculine.tscn" id="2_masc"]
+[ext_resource type="PackedScene" path="res://character-v2/variants/feminine.tscn" id="3_fem"]
+[ext_resource type="PackedScene" path="res://character-v2/variants/feminine_side.tscn" id="4_fem_side"]
+[ext_resource type="PackedScene" path="res://character-v2/outfits/casual.tscn" id="5_casual"]
+[ext_resource type="PackedScene" path="res://character-v2/outfits/casual_fem.tscn" id="6_casual_fem"]
 
 [node name="RigLabV2" type="Node2D"]
 script = ExtResource("1_lab")
 
-[node name="GameFront" parent="." instance=ExtResource("2_rig")]
+[node name="GameMasc" parent="." instance=ExtResource("2_masc")]
 unique_name_in_owner = true
-position = Vector2(40, 214)
+position = Vector2(20, 214)
+scale = Vector2(0.0625, 0.0625)
+outfits = Array[PackedScene]([ExtResource("5_casual")])
+
+[node name="GameFem" parent="." instance=ExtResource("3_fem")]
+unique_name_in_owner = true
+position = Vector2(38, 214)
+scale = Vector2(0.0625, 0.0625)
+outfits = Array[PackedScene]([ExtResource("6_casual_fem")])
+
+[node name="GameSideFem" parent="." instance=ExtResource("4_fem_side")]
+unique_name_in_owner = true
+position = Vector2(56, 214)
 scale = Vector2(0.0625, 0.0625)
 
-[node name="GameClothed" parent="." instance=ExtResource("2_rig")]
+[node name="MascRest" parent="." instance=ExtResource("2_masc")]
 unique_name_in_owner = true
-position = Vector2(62, 214)
-scale = Vector2(0.0625, 0.0625)
-outfits = Array[PackedScene]([ExtResource("4_casual")])
+position = Vector2(84, 214)
+scale = Vector2(0.15, 0.15)
 
-[node name="GameSide" parent="." instance=ExtResource("3_side")]
+[node name="FemRest" parent="." instance=ExtResource("3_fem")]
 unique_name_in_owner = true
-position = Vector2(88, 214)
-scale = Vector2(0.0625, 0.0625)
+position = Vector2(134, 214)
+scale = Vector2(0.15, 0.15)
 
-[node name="FrontRest" parent="." instance=ExtResource("2_rig")]
+[node name="SideRest" parent="." instance=ExtResource("4_fem_side")]
 unique_name_in_owner = true
-position = Vector2(122, 214)
-scale = Vector2(0.17, 0.17)
+position = Vector2(182, 214)
+scale = Vector2(0.15, 0.15)
 
-[node name="FrontPose" parent="." instance=ExtResource("2_rig")]
+[node name="MascPose" parent="." instance=ExtResource("2_masc")]
 unique_name_in_owner = true
-position = Vector2(198, 214)
-scale = Vector2(0.17, 0.17)
+position = Vector2(234, 214)
+scale = Vector2(0.15, 0.15)
+outfits = Array[PackedScene]([ExtResource("5_casual")])
 
-[node name="SidePose" parent="." instance=ExtResource("3_side")]
+[node name="FemPose" parent="." instance=ExtResource("3_fem")]
 unique_name_in_owner = true
-position = Vector2(275, 214)
-scale = Vector2(0.17, 0.17)
+position = Vector2(284, 214)
+scale = Vector2(0.15, 0.15)
+outfits = Array[PackedScene]([ExtResource("6_casual_fem")])

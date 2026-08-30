@@ -75,7 +75,7 @@ bones = [NodePath("Hips/ThighL"), PackedFloat32Array(0.35, 0, 0, 0, 0, 0, 0, 0, 
 [node name="UpperArmL" type="Polygon2D" parent="Skeleton2D"]
 color = Color(0.85, 0.756863, 0.666667, 1)
 skeleton = NodePath("..")
-polygon = PackedVector2Array(-23.5, -576, -1, -584, 21.5, -576, 28, -544, 23, -496, 12, -460, -2.5, -436, -25, -444, -33, -480, -30, -536)
+polygon = PackedVector2Array(-23.5, -576, -1, -574, 21.5, -576, 28, -544, 23, -496, 12, -460, -2.5, -436, -25, -444, -33, -480, -30, -536)
 bones = [NodePath("Hips/Spine/Chest"), PackedFloat32Array(0.35, 0.35, 0.35, 0, 0, 0, 0, 0, 0, 0.35), NodePath("Hips/Spine/Chest/UpperArmL"), PackedFloat32Array(0.65, 0.65, 0.65, 1, 1, 1, 1, 1, 1, 0.65)]
 
 [node name="ForearmL" type="Polygon2D" parent="Skeleton2D"]
@@ -105,7 +105,7 @@ bones = [NodePath("Hips/ThighR"), PackedFloat32Array(0.35, 0, 0, 0, 0, 0, 0, 0, 
 [node name="UpperArmR" type="Polygon2D" parent="Skeleton2D"]
 color = Color(1, 0.890196, 0.784314, 1)
 skeleton = NodePath("..")
-polygon = PackedVector2Array(-17.5, -576, 5, -584, 27.5, -576, 34, -544, 29, -496, 18, -460, 3.5, -436, -19, -444, -27, -480, -24, -536)
+polygon = PackedVector2Array(-17.5, -576, 5, -574, 27.5, -576, 34, -544, 29, -496, 18, -460, 3.5, -436, -19, -444, -27, -480, -24, -536)
 bones = [NodePath("Hips/Spine/Chest"), PackedFloat32Array(0.35, 0.35, 0.35, 0, 0, 0, 0, 0, 0, 0.35), NodePath("Hips/Spine/Chest/UpperArmR"), PackedFloat32Array(0.65, 0.65, 0.65, 1, 1, 1, 1, 1, 1, 0.65)]
 
 [node name="ForearmR" type="Polygon2D" parent="Skeleton2D"]
@@ -114,10 +114,16 @@ skeleton = NodePath("..")
 polygon = PackedVector2Array(-27, -464, -3, -467, 2, -424, 0, -384, -4.5, -360, -16, -347, -27, -360, -32, -392, -31, -432)
 bones = [NodePath("Hips/Spine/Chest/UpperArmR"), PackedFloat32Array(0.35, 0.35, 0, 0, 0, 0, 0, 0, 0), NodePath("Hips/Spine/Chest/UpperArmR/ForearmR"), PackedFloat32Array(0.65, 0.65, 1, 1, 1, 1, 1, 1, 1)]
 
+[node name="BackHair" type="Polygon2D" parent="Skeleton2D"]
+color = Color(0.42, 0.28, 0.21, 1)
+skeleton = NodePath("..")
+polygon = PackedVector2Array(2, -788, -29, -782, -55, -766, -74, -742, -86, -714, -101, -684, -118, -656, -134, -626, -146, -592, -156, -556, -139, -560, -130, -594, -115, -566, -106, -600, -91, -572, -82, -606, -67, -578, -58, -612, -43, -584, -34, -618, -19, -590, -10, -624, 2, -596, 12, -628)
+bones = [NodePath("Hips/Spine/Chest/Head"), PackedFloat32Array(1, 1, 1, 1, 0.75, 0.5, 0.3, 0.3, 0.3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1, 1), NodePath("Hips/Spine/Chest"), PackedFloat32Array(0, 0, 0, 0, 0.25, 0.5, 0.7, 0.7, 0.7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 0)]
+
 [node name="Neck" type="Polygon2D" parent="Skeleton2D"]
 color = Color(1, 0.890196, 0.784314, 1)
 skeleton = NodePath("..")
-polygon = PackedVector2Array(-24, -570, 30, -570, 34, -616, -28, -616)
+polygon = PackedVector2Array(-26, -640, 24, -636, 28, -536, -30, -532)
 bones = [NodePath("Hips/Spine/Chest"), PackedFloat32Array(0, 0, 0.6, 0.6), NodePath("Hips/Spine/Chest/Head"), PackedFloat32Array(1, 1, 0.4, 0.4)]
 
 [node name="Head" type="Polygon2D" parent="Skeleton2D"]
@@ -125,3 +131,27 @@ color = Color(1, 0.890196, 0.784314, 1)
 skeleton = NodePath("..")
 polygon = PackedVector2Array(0, -758, -45, -750, -75, -726, -88, -688, -86, -650, -58, -612, -20, -598, 24, -598, 52, -602, 68, -614, 76, -634, 72, -648, 98, -662, 84, -680, 80, -704, 72, -730, 42, -752)
 bones = [NodePath("Hips/Spine/Chest/Head"), PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="FaceEye" type="Polygon2D" parent="Skeleton2D"]
+color = Color(0.262745, 0.223529, 0.290196, 1)
+skeleton = NodePath("..")
+polygon = PackedVector2Array(59, -664, 58.1, -658.5, 55.5, -654.5, 52, -653, 48.5, -654.5, 45.9, -658.5, 45, -664, 45.9, -669.5, 48.5, -673.5, 52, -675, 55.5, -673.5, 58.1, -669.5)
+bones = [NodePath("Hips/Spine/Chest/Head"), PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="FaceShine" type="Polygon2D" parent="Skeleton2D"]
+color = Color(1, 0.960784, 0.901961, 1)
+skeleton = NodePath("..")
+polygon = PackedVector2Array(52.5, -668, 51.8, -666.2, 50, -665.5, 48.2, -666.2, 47.5, -668, 48.2, -669.8, 50, -670.5, 51.8, -669.8)
+bones = [NodePath("Hips/Spine/Chest/Head"), PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="FaceMouth" type="Polygon2D" parent="Skeleton2D"]
+color = Color(0.788235, 0.435294, 0.415686, 1)
+skeleton = NodePath("..")
+polygon = PackedVector2Array(66, -622, 63.7, -620.2, 58, -619.5, 52.3, -620.2, 50, -622, 52.3, -623.8, 58, -624.5, 63.7, -623.8)
+bones = [NodePath("Hips/Spine/Chest/Head"), PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="FrontHair" type="Polygon2D" parent="Skeleton2D"]
+color = Color(0.51, 0.34, 0.25, 1)
+skeleton = NodePath("..")
+polygon = PackedVector2Array(-70, -752, -40, -772, -6, -780, 28, -772, 52, -752, 66, -724, 72, -694, 70, -664, 56, -698, 46, -680, 36, -700, 26, -680, 16, -698, 4, -678, -8, -696, -20, -676, -32, -694, -46, -680, -56, -698, -64, -686)
+bones = [NodePath("Hips/Spine/Chest/Head"), PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]

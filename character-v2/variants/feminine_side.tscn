@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://character-v2/character_rig_v2_side.tscn" id="1_base"]
+
+[node name="FeminineRigSide" instance=ExtResource("1_base")]
+body_preset = "feminine"
+bust_center = Vector2(24, -516)

@@ -238,17 +238,21 @@ torso, arms (no hands), legs, neck, and head, in two views: front
   tone). Drop either into any scene at scale `1/16` to land on the
   16 px tile grid.
 - `character-v2/character_rig_v2.gd` is a small `@tool` helper that derives
-  each part's outline and layers outfits; see below.
+  each part's outline, layers outfits, and morphs the body shape; see below.
 - `character-v2/outfits/` holds garment scenes (e.g. `casual.tscn`): plain
   skinned `Polygon2D`s with `skeleton = ../..` and the same bone chains.
   Add them to the rig's `outfits` array — instances are layered under the
-  Skeleton2D right before `Neck` (over the body and arms, under neck and
-  head), in array order so later entries draw on top (shirt after pants).
-  The rig itself ships as a nude skin-toned base.
-- `character-v2/labs/rig_lab_v2.tscn` is the visual test bench: nude front,
-  front with the demo outfit, and side at true game scale on a 16 px grid,
-  plus the rest pose, a scripted test pose, and the side test pose at
-  comfortable editing zoom.
+  Skeleton2D right before `BackHair` (over the body and arms, under neck,
+  head, and hair), in array order so later entries draw on top (shirt after
+  pants). The rig itself ships as a nude skin-toned base. Garment parts get
+  their own outline layer behind the garment, so clothes never expose the
+  body's part seams.
+- `character-v2/variants/` pairs of front/side scenes with the `body_preset`
+  export set to `masculine` or `feminine`.
+- `character-v2/labs/rig_lab_v2.tscn` is the visual test bench: masc, fem,
+  and side figures at true game scale on a 16 px grid, plus rest-pose nude
+  bodies, the side rig, and both bodies posed in outfits at comfortable
+  editing zoom (`tools/capture_character_rig_v2.sh` saves a screenshot).
 
 Authoring conventions:
 
@@ -267,13 +271,35 @@ Authoring conventions:
   in a `Polygon2D`'s `bones` property resolve **relative to the
   Skeleton2D**, so nested bones need full chains such as
   `Hips/Spine/Chest`.
-- Draw order is tree order: legs, torso, arms, neck, head (side rig: far
-  limbs first, then torso, near limbs, neck, head).
+- Draw order is tree order: legs, torso, arms, back hair, neck, head, face
+  parts, front hair (side rig: far limbs first, then torso, near limbs,
+  back hair, neck, head). Body outlines live in one shared layer behind all
+  parts, so the silhouette reads as one continuous shape instead of stacked
+  per-part borders.
 - Outlines are **derived, never authored**: the rig script maintains a
   sibling `<Part>Outline` polygon (radially expanded, same vertex count, so
   it reuses the part's weights) and rebuilds it live when a part's points
   change in the editor. Generated outline nodes are never saved into the
   `.tscn`; thickness and colour are exports on the rig root.
+
+### Body morphs
+
+The script also warps the authored base into distinct body shapes — a
+piecewise-linear vertical remap through anatomical landmarks (feet, knee,
+hip, waist, chest, shoulder, chin, head top) plus a per-band horizontal
+scale and a localized radial bust bump. The same warp is sampled for bone
+rest positions and every skinned polygon (garments included), so a morphed
+body and its clothes stay registered, and the warp is idempotent: params at
+their defaults reproduce the authored scene exactly.
+
+- Exports: `leg_length`, `torso_length`, `neck_length`, `head_size`,
+  `shoulder_width`, `chest_width`, `waist_width`, `hip_width`,
+  `thigh_width`, `calf_width`, `bust` (+ `bust_center`/`bust_radius`,
+  useful on the side rig), and `hair_length` (scales the back-hair bottom
+  edge toward/away from the skull — short crops for masculine, long locks
+  for feminine).
+- `body_preset` copies a curated shape (`masculine` / `feminine`) into
+  those exports; `variants/` scenes are just base scenes with a preset.
 
 Run `tools/capture_character_rig_v2.sh` to write
 `artifacts/screenshots/character_rig_v2.png`.
