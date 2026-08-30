@@ -5,9 +5,9 @@ extends RefCounted
 ## Animation indexing lives in character_generator_layout.gd, not in YAML.
 
 const YAMLParser = preload("res://addons/yaml_dot_gd/yaml.gd")
-const CharacterGeneratorLayout = preload("res://sprites/character_generator_layout.gd")
-const CharacterSheetScript = preload("res://sprites/character_sheet.gd")
-const CharacterAnimDefScript = preload("res://sprites/character_anim_def.gd")
+const CharacterGeneratorLayout = preload("res://characters/character_generator_layout.gd")
+const CharacterSheetScript = preload("res://characters/character_sheet.gd")
+const CharacterAnimDefScript = preload("res://characters/character_anim_def.gd")
 
 const DEFAULT_CONFIG_PATH := "res://assets/characters/generated_characters.yaml"
 const OUTPUT_DIR := "res://assets/characters/generated"

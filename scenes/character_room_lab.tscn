@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/character_room_lab.gd" id="1_lab"]
+[ext_resource type="Script" path="res://scripts/room_renderer.gd" id="2_room"]
+[ext_resource type="Script" path="res://characters/character_sprite.gd" id="3_character"]
+
+[node name="CharacterRoomLab" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="Room" type="Node2D" parent="."]
+script = ExtResource("2_room")
+layout_path = "res://rooms/character_corner.yaml"
+
+[node name="AmbientPalette" type="CanvasModulate" parent="."]
+color = Color(0.94, 0.91, 0.88, 1)
+
+[node name="Character" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 3
+script = ExtResource("3_character")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(24, 24)
+zoom = Vector2(2, 2)

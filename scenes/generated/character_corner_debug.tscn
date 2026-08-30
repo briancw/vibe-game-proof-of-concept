@@ -1,0 +1,75 @@
+[gd_scene format=4]
+
+[ext_resource type="TileSet" path="res://tiles/interiors_tileset.tres" id="1_faynr"]
+[ext_resource type="Texture2D" path="res://assets/tiles/Theme_Sorter/1_Generic_16x16.png" id="2_gbt3q"]
+[ext_resource type="Texture2D" path="res://assets/tiles/Theme_Sorter/4_Bedroom_16x16.png" id="3_0a40k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3omtu"]
+atlas = ExtResource("2_gbt3q")
+region = Rect2(128, 896, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dexgp"]
+atlas = ExtResource("3_0a40k")
+region = Rect2(128, 1136, 16, 32)
+
+[node name="character_cornerDebug" type="Node2D" unique_id=696698222]
+metadata/source_layout = {
+"grid_size": [3, 4],
+"layers": [{
+"name": "Floor",
+"operations": [{
+"tile": "floor.wood.oak",
+"type": "fill"
+}],
+"z_index": 0
+}, {
+"name": "Frame",
+"operations": [{
+"bottom": "border.white.bottom",
+"bottom_left": "border.corner.bottom_left",
+"bottom_right": "border.corner.bottom_right",
+"left": "border.white.left",
+"right": "border.white.right",
+"top_left": "border.corner.top_left",
+"top_right": "border.corner.top_right",
+"top_rows": ["wall.wood.vertical.top", "wall.wood.vertical.bottom"],
+"type": "frame"
+}],
+"z_index": 1
+}],
+"name": "character_corner",
+"props": [{
+"at": [0, 0],
+"id": "prop.plant.bushy",
+"z_index": 2
+}, {
+"at": [2, 0],
+"id": "prop.side_table",
+"z_index": 2
+}]
+}
+
+[node name="Floor" type="TileMapLayer" parent="." unique_id=1057252681]
+tile_map_data = PackedByteArray("AAAAAAAAAwAjABYAAAABAAAAAwAjABYAAAACAAAAAwAjABYAAAAAAAEAAwAjABYAAAABAAEAAwAjABYAAAACAAEAAwAjABYAAAAAAAIAAwAjABYAAAABAAIAAwAjABYAAAACAAIAAwAjABYAAAAAAAMAAwAjABYAAAABAAMAAwAjABYAAAACAAMAAwAjABYAAAA=")
+tile_set = ExtResource("1_faynr")
+
+[node name="Frame" type="TileMapLayer" parent="." unique_id=743233790]
+z_index = 1
+tile_map_data = PackedByteArray("AAAAAP7/AwABACUAAAABAP7/AwABACUAAAACAP7/AwABACUAAAAAAP//AwABACYAAAABAP//AwABACYAAAACAP//AwABACYAAAAAAAQAAwAMAAgAAAABAAQAAwAMAAgAAAACAAQAAwAMAAgAAAD/////AwALAAcAAAADAP//AwANAAcAAAD//wAAAwALAAcAAAADAAAAAwANAAcAAAD//wEAAwALAAcAAAADAAEAAwANAAcAAAD//wIAAwALAAcAAAADAAIAAwANAAcAAAD//wMAAwALAAcAAAADAAMAAwANAAcAAAD///7/AwALAAYAAAADAP7/AwANAAYAAAD//wQAAwALAAgAAAADAAQAAwANAAgAAAA=")
+tile_set = ExtResource("1_faynr")
+
+[node name="Props" type="Node2D" parent="." unique_id=539101003]
+
+[node name="prop_plant_bushy" type="Sprite2D" parent="Props" unique_id=627075300]
+z_index = 2
+position = Vector2(0, 16)
+texture = SubResource("AtlasTexture_3omtu")
+centered = false
+offset = Vector2(-8, -39)
+
+[node name="prop_side_table" type="Sprite2D" parent="Props" unique_id=2003096333]
+z_index = 2
+position = Vector2(32, 16)
+texture = SubResource("AtlasTexture_dexgp")
+centered = false
+offset = Vector2(-0.5, -26)

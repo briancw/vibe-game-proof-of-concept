@@ -24,8 +24,8 @@ layers:
 
 props:
   prop.plant.bushy:
-    at: [0, 3]
+    at: [0, 0]
     z_index: 2
   prop.side_table:
-    at: [2, 3]
+    at: [2, 0]
     z_index: 2

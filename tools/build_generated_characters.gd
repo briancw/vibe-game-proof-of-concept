@@ -7,8 +7,8 @@ extends SceneTree
 ##   godot --headless --path . --script res://tools/build_generated_characters.gd
 ##   godot --headless --path . --script res://tools/build_generated_characters.gd -- --check
 
-const GeneratedCharacters = preload("res://sprites/generated_characters.gd")
-const CharacterGeneratorLayout = preload("res://sprites/character_generator_layout.gd")
+const GeneratedCharacters = preload("res://characters/generated_characters.gd")
+const CharacterGeneratorLayout = preload("res://characters/character_generator_layout.gd")
 
 
 func _initialize() -> void:

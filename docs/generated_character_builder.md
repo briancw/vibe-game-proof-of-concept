@@ -34,7 +34,7 @@ godot --headless --path . --script res://tools/build_generated_characters.gd
 It writes one `assets/characters/generated/<id>.png` strip per character. No
 runtime YAML parsing or JSON sidecar files are required: each strip is always
 928×32 pixels and uses the animation table in
-[`sprites/character_generator_layout.gd`](../sprites/character_generator_layout.gd).
+[`characters/character_generator_layout.gd`](../characters/character_generator_layout.gd).
 That table explicitly shows the raw source origin, packed strip origin, frame
 count, FPS, loop setting, and optional frame events for every animation.
 

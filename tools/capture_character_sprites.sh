@@ -18,7 +18,7 @@ export LIBGL_ALWAYS_SOFTWARE=1
 
 xvfb-run -a -s "-screen 0 1920x1080x24 -ac -nolisten tcp" \
 	"${GODOT_BIN:-godot}" --display-driver x11 --path "$project_dir" \
-	--rendering-driver opengl3 --audio-driver Dummy res://sprites/labs/character_sprites_lab.tscn -- --capture
+	--rendering-driver opengl3 --audio-driver Dummy res://scenes/character_sprites_lab.tscn -- --capture
 
 mv "$user_data_dir/data/godot/app_userdata/Modern Interiors Tile Concept"/character_sprites_*.png \
 	"$output_dir/"

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="PackedScene" path="res://character-v2/character_rig_v2.tscn" id="1_base"]
-
-[node name="FeminineRig" instance=ExtResource("1_base")]
-body_preset = "feminine"
