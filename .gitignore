@@ -1,4 +1,6 @@
 .godot/
 assets/
-artifacts/
+artifacts/godot-user-data/
+artifacts/ref/
+artifacts/**/*.import
 state/
