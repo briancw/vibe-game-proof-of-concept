@@ -1,0 +1,45 @@
+[gd_scene load_steps=1 format=3]
+
+[node name="CasualOutfit" type="Node2D"]
+
+[node name="PantsThighL" type="Polygon2D" parent="."]
+color = Color(0.313725, 0.25098, 0.305882, 1)
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(-72, -368, -60, -384, -12, -384, 0, -368, 1.5, -304, 6.5, -240, -4, -192, -32, -180, -64, -192, -73.5, -240, -75, -304)
+bones = [NodePath("Hips"), PackedFloat32Array(0.3, 0.3, 0.3, 0, 0, 0, 0, 0, 0, 0, 0), NodePath("Hips/ThighL"), PackedFloat32Array(0.7, 0.7, 0.7, 1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="PantsThighR" type="Polygon2D" parent="."]
+color = Color(0.313725, 0.25098, 0.305882, 1)
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(72, -368, 60, -384, 12, -384, 0, -368, -1.5, -304, -6.5, -240, 4, -192, 32, -180, 64, -192, 73.5, -240, 75, -304)
+bones = [NodePath("Hips"), PackedFloat32Array(0.3, 0.3, 0.3, 0, 0, 0, 0, 0, 0, 0, 0), NodePath("Hips/ThighR"), PackedFloat32Array(0.7, 0.7, 0.7, 1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="PantsShinL" type="Polygon2D" parent="."]
+color = Color(0.313725, 0.25098, 0.305882, 1)
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(-13, -204, -14.5, -144, -16, -80, -9.5, -48, 5, -24, 3, -8, -20, 0, -60, 0, -77, -8, -75, -24, -64, -48, -65.5, -80, -67, -144, -69, -204)
+bones = [NodePath("Hips/ThighL"), PackedFloat32Array(0.35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.35), NodePath("Hips/ThighL/ShinL"), PackedFloat32Array(0.65, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.65)]
+
+[node name="PantsShinR" type="Polygon2D" parent="."]
+color = Color(0.313725, 0.25098, 0.305882, 1)
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(13, -204, 14.5, -144, 16, -80, 9.5, -48, -5, -24, -3, -8, 20, 0, 60, 0, 77, -8, 75, -24, 64, -48, 65.5, -80, 67, -144, 69, -204)
+bones = [NodePath("Hips/ThighR"), PackedFloat32Array(0.35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.35), NodePath("Hips/ThighR/ShinR"), PackedFloat32Array(0.65, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.65)]
+
+[node name="SleeveL" type="Polygon2D" parent="."]
+color = Color(0.541176, 0.627451, 0.478431, 1)
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(-102.5, -576, -80, -584, -57.5, -576, -51, -544, -56, -496, -67, -460, -81.5, -436, -104, -444, -112, -480, -109, -536)
+bones = [NodePath("Hips/Spine/Chest"), PackedFloat32Array(0.35, 0.35, 0.35, 0, 0, 0, 0, 0, 0, 0.35), NodePath("Hips/Spine/Chest/UpperArmL"), PackedFloat32Array(0.65, 0.65, 0.65, 1, 1, 1, 1, 1, 1, 0.65)]
+
+[node name="SleeveR" type="Polygon2D" parent="."]
+color = Color(0.541176, 0.627451, 0.478431, 1)
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(102.5, -576, 80, -584, 57.5, -576, 51, -544, 56, -496, 67, -460, 81.5, -436, 104, -444, 112, -480, 109, -536)
+bones = [NodePath("Hips/Spine/Chest"), PackedFloat32Array(0.35, 0.35, 0.35, 0, 0, 0, 0, 0, 0, 0.35), NodePath("Hips/Spine/Chest/UpperArmR"), PackedFloat32Array(0.65, 0.65, 0.65, 1, 1, 1, 1, 1, 1, 0.65)]
+
+[node name="Shirt" type="Polygon2D" parent="."]
+color = Color(0.541176, 0.627451, 0.478431, 1)
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(-84, -560, -96, -536, -96, -496, -76, -440, -84, -384, -80, -336, -48, -308, 48, -308, 80, -336, 84, -384, 76, -440, 96, -496, 96, -536, 84, -560, 0, -576)
+bones = [NodePath("Hips"), PackedFloat32Array(0, 0, 0, 0, 0.6, 1, 1, 1, 1, 0.6, 0, 0, 0, 0, 0), NodePath("Hips/Spine"), PackedFloat32Array(0, 0, 0.3, 1, 0.4, 0, 0, 0, 0, 0.4, 1, 0.3, 0, 0, 0), NodePath("Hips/Spine/Chest"), PackedFloat32Array(1, 1, 0.7, 0, 0, 0, 0, 0, 0, 0, 0, 0.7, 1, 1, 1)]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" uid="uid://cboafkftpu3lb" path="res://character-v2/labs/rig_lab_v2.gd" id="1_lab"]
+[ext_resource type="PackedScene" path="res://character-v2/character_rig_v2.tscn" id="2_rig"]
+[ext_resource type="PackedScene" path="res://character-v2/character_rig_v2_side.tscn" id="3_side"]
+[ext_resource type="PackedScene" path="res://character-v2/outfits/casual.tscn" id="4_casual"]
+
+[node name="RigLabV2" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="GameFront" parent="." instance=ExtResource("2_rig")]
+unique_name_in_owner = true
+position = Vector2(40, 214)
+scale = Vector2(0.0625, 0.0625)
+
+[node name="GameClothed" parent="." instance=ExtResource("2_rig")]
+unique_name_in_owner = true
+position = Vector2(62, 214)
+scale = Vector2(0.0625, 0.0625)
+outfits = Array[PackedScene]([ExtResource("4_casual")])
+
+[node name="GameSide" parent="." instance=ExtResource("3_side")]
+unique_name_in_owner = true
+position = Vector2(88, 214)
+scale = Vector2(0.0625, 0.0625)
+
+[node name="FrontRest" parent="." instance=ExtResource("2_rig")]
+unique_name_in_owner = true
+position = Vector2(122, 214)
+scale = Vector2(0.17, 0.17)
+
+[node name="FrontPose" parent="." instance=ExtResource("2_rig")]
+unique_name_in_owner = true
+position = Vector2(198, 214)
+scale = Vector2(0.17, 0.17)
+
+[node name="SidePose" parent="." instance=ExtResource("3_side")]
+unique_name_in_owner = true
+position = Vector2(275, 214)
+scale = Vector2(0.17, 0.17)
