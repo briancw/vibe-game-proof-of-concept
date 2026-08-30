@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://bwne4o4777rmx"]
+
+[ext_resource type="PackedScene" path="res://character/character_preview.tscn" id="1_preview"]
+
+[node name="CharacterEdit" type="Node2D" unique_id=355115634]
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=1683810679]
+offset_left = -220.0
+offset_top = -290.0
+offset_right = 200.0
+offset_bottom = 120.0
+color = Color(0.16, 0.16, 0.18, 1)
+
+[node name="Hint" type="Label" parent="." unique_id=2007205667]
+offset_left = -180.0
+offset_top = -252.0
+offset_right = 180.0
+offset_bottom = -240.0
+theme_override_colors/font_color = Color(0.85, 0.82, 0.78, 1)
+theme_override_font_sizes/font_size = 8
+text = "EDIT CHARACTER - select an AuthoredShapes polygon and drag its points"
+
+[node name="CharacterPreview" parent="." unique_id=2018435456 instance=ExtResource("1_preview")]
+scale = Vector2(3, 3)
+height = 0.1375
+weight = 0.125
+hip_width = 0.145
+bust_size = 0.125
+skin_tone = 0.115
+outfit_index = 5.0
+show_rig_guides = true
+pixelated = false
+
+[node name="Pelvis" parent="CharacterPreview/Skeleton2D" index="0"]
+position = Vector2(0, -9.243)
+rest = Transform2D(1, 0, 0, 1, 0, -9.243)
+
+[node name="Spine" parent="CharacterPreview/Skeleton2D/Pelvis" index="0"]
+position = Vector2(22.333334, 7.5763335)
+rest = Transform2D(1, 0, 0, 1, 0, -6.162)
+
+[node name="Chest" parent="CharacterPreview/Skeleton2D/Pelvis/Spine" index="0"]
+position = Vector2(0, -6.162)
+rest = Transform2D(1, 0, 0, 1, 0, -6.162)
+
+[node name="Head" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest" index="0"]
+position = Vector2(0, -7.7025)
+rest = Transform2D(1, 0, 0, 1, 0, -7.7025)
+
+[node name="UpperArmLeft" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest" index="1"]
+position = Vector2(-6.559, 0.9)
+rest = Transform2D(1, 0, 0, 1, -6.559, 0.9)
+
+[node name="ForearmLeft" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmLeft" index="0"]
+position = Vector2(-0.101, 4.46745)
+rest = Transform2D(1, 0, 0, 1, -0.101, 4.46745)
+
+[node name="HandLeft" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmLeft/ForearmLeft" index="0"]
+position = Vector2(1.3, 4.3134)
+rest = Transform2D(1, 0, 0, 1, 1.3, 4.3134)
+
+[node name="UpperArmRight" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest" index="2"]
+position = Vector2(6.559, 0.3)
+rest = Transform2D(1, 0, 0, 1, 6.559, 0.3)
+
+[node name="ForearmRight" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmRight" index="0"]
+position = Vector2(5.7743335, 3.2670007)
+rest = Transform2D(1, 0, 0, 1, 0.101, 4.7242)
+
+[node name="HandRight" parent="CharacterPreview/Skeleton2D/Pelvis/Spine/Chest/UpperArmRight/ForearmRight" index="0"]
+position = Vector2(2.000001, 8.666666)
+rest = Transform2D(1, 0, 0, 1, -1.3, 4.5188)
+
+[node name="ThighLeft" parent="CharacterPreview/Skeleton2D/Pelvis" index="1"]
+position = Vector2(-2.222, 0.5)
+rest = Transform2D(1, 0, 0, 1, -2.222, 0.5)
+
+[node name="ShinLeft" parent="CharacterPreview/Skeleton2D/Pelvis/ThighLeft" index="0"]
+position = Vector2(-0.4, 4.87825)
+rest = Transform2D(1, 0, 0, 1, -0.4, 4.87825)
+
+[node name="FootLeft" parent="CharacterPreview/Skeleton2D/Pelvis/ThighLeft/ShinLeft" index="0"]
+position = Vector2(-0.7, 5.39175)
+rest = Transform2D(1, 0, 0, 1, -0.7, 5.39175)
+
+[node name="ThighRight" parent="CharacterPreview/Skeleton2D/Pelvis" index="2"]
+position = Vector2(2.222, 0.5)
+rest = Transform2D(1, 0, 0, 1, 2.222, 0.5)
+
+[node name="ShinRight" parent="CharacterPreview/Skeleton2D/Pelvis/ThighRight" index="0"]
+position = Vector2(0.4, 4.87825)
+rest = Transform2D(1, 0, 0, 1, 0.4, 4.87825)
+
+[node name="FootRight" parent="CharacterPreview/Skeleton2D/Pelvis/ThighRight/ShinRight" index="0"]
+position = Vector2(0.7, 5.39175)
+rest = Transform2D(1, 0, 0, 1, 0.7, 5.39175)
+
+[node name="AuthoredShapes" parent="CharacterPreview" index="1"]
+visible = false
+
+[node name="dress" parent="CharacterPreview/AuthoredShapes" index="1"]
+visible = false
+
+[node name="sweater" parent="CharacterPreview/AuthoredShapes" index="2"]
+visible = false
+
+[node name="sweater_hem" parent="CharacterPreview/AuthoredShapes" index="3"]
+visible = false
+
+[node name="overalls_body" parent="CharacterPreview/AuthoredShapes" index="4"]
+visible = false
+
+[node name="overalls_bib" parent="CharacterPreview/AuthoredShapes" index="5"]
+visible = false
+
+[node name="tube" parent="CharacterPreview/AuthoredShapes" index="6"]
+visible = false
+
+[node name="skirt" parent="CharacterPreview/AuthoredShapes" index="7"]
+visible = false
+
+[node name="bikini_top" parent="CharacterPreview/AuthoredShapes" index="8"]
+visible = false
+
+[node name="bikini_bottom" parent="CharacterPreview/AuthoredShapes" index="9"]
+visible = false
+
+[node name="hair_front_0" parent="CharacterPreview/AuthoredShapes" index="10"]
+visible = false
+
+[node name="hair_front_2" parent="CharacterPreview/AuthoredShapes" index="12"]
+visible = false
+
+[node name="hair_front_3" parent="CharacterPreview/AuthoredShapes" index="13"]
+visible = false
+
+[node name="hair_back_ponytail" parent="CharacterPreview/AuthoredShapes" index="15"]
+visible = false
+
+[node name="EditCamera" type="Camera2D" parent="." unique_id=1376100202]
+position = Vector2(0, -6)
+zoom = Vector2(1.15, 1.15)
+
+[editable path="CharacterPreview"]

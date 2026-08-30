@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/character_idle_strip.gd" id="1_idle"]
+[ext_resource type="Script" path="res://character/labs/character_idle_strip.gd" id="1_idle"]
 
 [node name="CharacterIdleStrip" type="Node2D"]
 script = ExtResource("1_idle")

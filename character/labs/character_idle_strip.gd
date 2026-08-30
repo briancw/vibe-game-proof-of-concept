@@ -5,7 +5,7 @@ extends Node2D
 ## can be graded in still captures exactly as they will appear in motion.
 ## Every instance has animate=false; the phase is set explicitly.
 
-const PREVIEW_SCENE := preload("res://scenes/character_preview.tscn")
+const PREVIEW_SCENE := preload("res://character/character_preview.tscn")
 
 # Breathing alternates up/down every IDLE_FRAME_SECONDS (0.75 s); the blink
 # occupies the last 0.26 s of every 4.6 s. The last entry samples that window.

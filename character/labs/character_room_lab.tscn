@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/character_room_lab.gd" id="1_lab"]
+[ext_resource type="Script" path="res://character/labs/character_room_lab.gd" id="1_lab"]
 [ext_resource type="Script" path="res://scripts/room_renderer.gd" id="2_room"]
-[ext_resource type="PackedScene" path="res://scenes/character_preview.tscn" id="3_character"]
-[ext_resource type="Shader" path="res://shaders/character_scene_blend.gdshader" id="4_blend"]
+[ext_resource type="PackedScene" path="res://character/character_preview.tscn" id="3_character"]
+[ext_resource type="Shader" path="res://character/character_scene_blend.gdshader" id="4_blend"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_blend"]
 shader = ExtResource("4_blend")

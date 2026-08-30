@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/character_lab.gd" id="1_lab"]
-[ext_resource type="PackedScene" path="res://scenes/character_preview.tscn" id="3_preview_scene"]
+[ext_resource type="Script" path="res://character/labs/character_lab.gd" id="1_lab"]
+[ext_resource type="PackedScene" path="res://character/character_preview.tscn" id="3_preview_scene"]
 
 [node name="CharacterLab" type="Node2D"]
 script = ExtResource("1_lab")
 
 [node name="CharacterPreview" parent="." instance=ExtResource("3_preview_scene")]
 position = Vector2(86, 199)
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 height = 0.1375
 weight = 0.125
 hip_width = 0.145
@@ -24,33 +24,24 @@ hair_color_index = 3
 offset_left = 172.0
 offset_top = 28.0
 offset_right = 308.0
-offset_bottom = 226.0
+offset_bottom = 234.0
 color = Color(0.12549, 0.145098, 0.203922, 0.96)
 
 [node name="PanelBorder" type="ReferenceRect" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_right = 136.0
-offset_bottom = 198.0
+offset_bottom = 206.0
 border_color = Color(0.27451, 0.313726, 0.392157, 1)
 border_width = 1.0
-
-[node name="ControlsHeading" type="Label" parent="UI/ControlPanel"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 6.0
-offset_right = 124.0
-offset_bottom = 17.0
-theme_override_colors/font_color = Color(0.905882, 0.87451, 0.815686, 1)
-theme_override_font_sizes/font_size = 7
-text = "PARAMETRIC CONTROLS"
+mouse_filter = 2
 
 [node name="PresetLabel" type="Label" parent="UI/ControlPanel"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 12.0
-offset_top = 20.0
-offset_right = 124.0
-offset_bottom = 32.0
+offset_top = 8.0
+offset_right = 68.0
+offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.560784, 0.627451, 0.713725, 1)
 theme_override_font_sizes/font_size = 7
 text = "PRESET 01 / 03"
@@ -58,9 +49,9 @@ text = "PRESET 01 / 03"
 [node name="HeightLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 43
+offset_top = 27
 offset_right = 64.0
-offset_bottom = 55
+offset_bottom = 39
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "HEIGHT"
@@ -69,9 +60,9 @@ text = "HEIGHT"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 43
+offset_top = 27
 offset_right = 122.0
-offset_bottom = 55
+offset_bottom = 39
 max_value = 0.25
 step = 0.0125
 value = 0.1375
@@ -79,9 +70,9 @@ value = 0.1375
 [node name="WeightLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 61
+offset_top = 44
 offset_right = 64.0
-offset_bottom = 73
+offset_bottom = 56
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "WEIGHT"
@@ -90,9 +81,9 @@ text = "WEIGHT"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 61
+offset_top = 44
 offset_right = 122.0
-offset_bottom = 73
+offset_bottom = 56
 max_value = 0.25
 step = 0.0125
 value = 0.125
@@ -100,9 +91,9 @@ value = 0.125
 [node name="HipsLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 79
+offset_top = 61
 offset_right = 64.0
-offset_bottom = 91
+offset_bottom = 73
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "HIPS"
@@ -111,9 +102,9 @@ text = "HIPS"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 83
+offset_top = 61
 offset_right = 122.0
-offset_bottom = 95
+offset_bottom = 73
 max_value = 0.25
 step = 0.0125
 value = 0.145
@@ -121,9 +112,9 @@ value = 0.145
 [node name="BustLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 97
+offset_top = 78
 offset_right = 64.0
-offset_bottom = 109
+offset_bottom = 90
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "BUST"
@@ -132,9 +123,9 @@ text = "BUST"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 97
+offset_top = 78
 offset_right = 122.0
-offset_bottom = 109
+offset_bottom = 90
 max_value = 0.25
 step = 0.0125
 value = 0.125
@@ -142,9 +133,9 @@ value = 0.125
 [node name="SkinLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 115
+offset_top = 95
 offset_right = 64.0
-offset_bottom = 127
+offset_bottom = 107
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "SKIN"
@@ -153,9 +144,9 @@ text = "SKIN"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 115
+offset_top = 95
 offset_right = 122.0
-offset_bottom = 127
+offset_bottom = 107
 max_value = 0.25
 step = 0.0125
 value = 0.12
@@ -163,9 +154,9 @@ value = 0.12
 [node name="OutfitLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 133
+offset_top = 112
 offset_right = 64.0
-offset_bottom = 145
+offset_bottom = 124
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "OUTFIT"
@@ -174,19 +165,19 @@ text = "OUTFIT"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 133
+offset_top = 112
 offset_right = 122.0
-offset_bottom = 145
-max_value = 4.0
+offset_bottom = 124
+max_value = 5.0
 step = 1.0
 value = 1.0
 
 [node name="HairLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 151
+offset_top = 129
 offset_right = 64.0
-offset_bottom = 163
+offset_bottom = 141
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "HAIR"
@@ -195,9 +186,9 @@ text = "HAIR"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 151
+offset_top = 129
 offset_right = 122.0
-offset_bottom = 163
+offset_bottom = 141
 max_value = 3.0
 step = 1.0
 value = 1.0
@@ -205,9 +196,9 @@ value = 1.0
 [node name="HairColorLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 169
+offset_top = 146
 offset_right = 64.0
-offset_bottom = 181
+offset_bottom = 158
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "HAIR COLOR"
@@ -216,9 +207,9 @@ text = "HAIR COLOR"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 169
+offset_top = 146
 offset_right = 122.0
-offset_bottom = 181
+offset_bottom = 158
 max_value = 3.0
 step = 1.0
 value = 1.0
@@ -226,9 +217,9 @@ value = 1.0
 [node name="EyesLabel" type="Label" parent="UI/ControlPanel"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 187
+offset_top = 163
 offset_right = 64.0
-offset_bottom = 199
+offset_bottom = 175
 theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
 theme_override_font_sizes/font_size = 8
 text = "EYES"
@@ -237,20 +228,52 @@ text = "EYES"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 187
+offset_top = 163
 offset_right = 122.0
-offset_bottom = 199
+offset_bottom = 175
 max_value = 2.0
 step = 1.0
 value = 0.0
 
-[node name="PresetButton" type="Button" parent="UI/ControlPanel"]
+[node name="FacingLabel" type="Label" parent="UI/ControlPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 176.0
+offset_right = 62.0
+offset_bottom = 186.0
+theme_override_colors/font_color = Color(0.827451, 0.85098, 0.862745, 1)
+theme_override_font_sizes/font_size = 8
+text = "FACING"
+
+[node name="FacingSlider" type="HSlider" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 174.0
+offset_right = 122.0
+offset_bottom = 186.0
+max_value = 2.0
+step = 1.0
+value = 0.0
+
+[node name="PixelButton" type="Button" parent="UI/ControlPanel"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 12.0
-offset_top = 202.0
-offset_right = 122.0
-offset_bottom = 217.0
+offset_top = 191.0
+offset_right = 66.0
+offset_bottom = 203.0
 theme_override_colors/font_color = Color(0.858824, 0.831373, 0.768627, 1)
 theme_override_font_sizes/font_size = 7
-text = "NEXT PRESET  [SPACE]"
+text = "PIXELS: ON"
+
+[node name="PresetButton" type="Button" parent="UI/ControlPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 70.0
+offset_top = 191.0
+offset_right = 122.0
+offset_bottom = 203.0
+theme_override_colors/font_color = Color(0.858824, 0.831373, 0.768627, 1)
+theme_override_font_sizes/font_size = 7
+text = "PRESET"

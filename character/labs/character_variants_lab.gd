@@ -5,7 +5,7 @@ extends Node2D
 ## image. Rows vary hair style (and hair colour), columns vary outfit and
 ## skin tone.
 
-const PREVIEW_SCENE := preload("res://scenes/character_preview.tscn")
+const PREVIEW_SCENE := preload("res://character/character_preview.tscn")
 
 # Row-major [hair_style, hair_color] and per-column [outfit, skin_tone, eyes].
 const ROWS := [
@@ -16,10 +16,10 @@ const ROWS := [
 ]
 const COLUMNS := [
 	{"outfit": 0, "skin": 0.05, "eyes": 0},
-	{"outfit": 1, "skin": 0.115, "eyes": 1},
-	{"outfit": 2, "skin": 0.185, "eyes": 2},
-	{"outfit": 3, "skin": 0.08, "eyes": 0},
-	{"outfit": 4, "skin": 0.15, "eyes": 1},
+	{"outfit": 2, "skin": 0.115, "eyes": 1},
+	{"outfit": 3, "skin": 0.185, "eyes": 2},
+	{"outfit": 4, "skin": 0.08, "eyes": 0},
+	{"outfit": 5, "skin": 0.15, "eyes": 1},
 ]
 const ORIGIN := Vector2(52.0, 66.0)
 const CELL := Vector2(54.0, 52.0)
