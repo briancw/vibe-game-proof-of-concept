@@ -1,0 +1,113 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://sprites/labs/character_sprites_lab.gd" id="1_lab"]
+
+[node name="CharacterSpritesLab" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SheetLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+offset_left = 14.0
+offset_top = 6.0
+offset_right = 308.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.909804, 0.87451, 0.815686, 1)
+theme_override_font_sizes/font_size = 8
+text = "CHARACTER 01/01"
+
+[node name="AnimLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+offset_left = 14.0
+offset_top = 20.0
+offset_right = 308.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.560784, 0.627451, 0.713725, 1)
+theme_override_font_sizes/font_size = 8
+text = "ANIM STAND_DOWN"
+
+[node name="ButtonBar" type="ColorRect" parent="UI"]
+offset_top = 192.0
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0.12549, 0.145098, 0.203922, 1)
+
+[node name="PrevCharacterButton" type="Button" parent="UI/ButtonBar"]
+unique_name_in_owner = true
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 80.0
+offset_bottom = 21.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 7
+text = "< CHARACTER"
+
+[node name="NextCharacterButton" type="Button" parent="UI/ButtonBar"]
+unique_name_in_owner = true
+offset_left = 84.0
+offset_top = 7.0
+offset_right = 158.0
+offset_bottom = 21.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 7
+text = "CHARACTER >"
+
+[node name="PrevAnimButton" type="Button" parent="UI/ButtonBar"]
+unique_name_in_owner = true
+offset_left = 162.0
+offset_top = 7.0
+offset_right = 236.0
+offset_bottom = 21.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 7
+text = "< ANIM"
+
+[node name="NextAnimButton" type="Button" parent="UI/ButtonBar"]
+unique_name_in_owner = true
+offset_left = 240.0
+offset_top = 7.0
+offset_right = 314.0
+offset_bottom = 21.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 7
+text = "ANIM >"
+
+[node name="PrevFacingButton" type="Button" parent="UI/ButtonBar"]
+unique_name_in_owner = true
+offset_left = 6.0
+offset_top = 25.0
+offset_right = 80.0
+offset_bottom = 39.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 7
+text = "< FACE"
+
+[node name="NextFacingButton" type="Button" parent="UI/ButtonBar"]
+unique_name_in_owner = true
+offset_left = 84.0
+offset_top = 25.0
+offset_right = 158.0
+offset_bottom = 39.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 7
+text = "FACE >"
+
+[node name="PauseButton" type="Button" parent="UI/ButtonBar"]
+unique_name_in_owner = true
+offset_left = 162.0
+offset_top = 25.0
+offset_right = 236.0
+offset_bottom = 39.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 7
+text = "PAUSE"
+
+[node name="KeysHint" type="Label" parent="UI/ButtonBar"]
+offset_left = 240.0
+offset_top = 25.0
+offset_right = 314.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0.560784, 0.627451, 0.713725, 1)
+theme_override_font_sizes/font_size = 6
+text = "TAB Q/E ARROWS SPACE"

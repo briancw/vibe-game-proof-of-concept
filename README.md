@@ -95,6 +95,16 @@ Open `project.godot` and select `editor_room.tscn` to inspect the generated
 room. To capture it, run `tools/capture_screenshots.sh`; it writes
 `artifacts/screenshots/room.png`.
 
+## Aseprite source inspection
+
+`tools/inspect_ase.js` reads Aseprite document metadata without requiring
+Aseprite itself. It emits JSON with the canvas, layers, frame durations, cels,
+and named animation tags; it does not modify or decompress the artwork.
+
+```sh
+node tools/inspect_ase.js assets/characters/Premade_Characters.ase
+```
+
 ## Player prototype
 
 Run the project to control the temporary red-circle player with **WASD** or
@@ -312,11 +322,50 @@ godot --headless --path . --script res://tools/zoom_region.gd -- \
 	src.png out.png <x> <y> <w> <h> <scale>
 ```
 
+## Sprite sheet characters
+
+`sprites/` is a simple, data-driven character system for compact generated
+strips. It replaces the rig experiments for gameplay purposes: a character is
+a texture plus a list of animation definitions, rendered by a lightweight
+`CharacterSprite` node.
+
+- `sprites/character_anim_def.gd` — one animation: name, frame origin in sheet
+  pixels, frame count, fps, loop flag.
+- `sprites/character_sheet.gd` — a `Resource` describing one character sheet:
+  texture, uniform `frame_size`, and its `CharacterAnimDef` list. It builds and
+  caches Godot `SpriteFrames` on demand, so any number of on-screen characters
+  share one build. Adding a character means describing (or reusing) a layout
+  and pointing it at a new texture.
+- `sprites/character_sprite.gd` — the render node. One node per character;
+  origin sits at the character's feet. `animation` is a base name (`stand`,
+  `idle`, `walk`, `sleep`); directional animations resolve to
+  `<animation>_<facing>`, so changing `facing` (`down`/`left`/`up`/`right`)
+  retargets the animation automatically, and non-directional animations such
+  as `sleep` play verbatim.
+- `sprites/generated_characters.gd` — loads the YAML character definitions
+  and their generated compact strips. The loader derives contiguous animation
+  ranges from the configured action list.
+- `sprites/character_generator_layout.gd` — source-atlas action definitions
+  used by both the strip builder and runtime loader.
+- `characters/generated_characters.yaml` — top-level action selections,
+  followed by each character's layer selections. Run
+  `tools/build_generated_characters.gd` after editing it.
+
+`sprites/labs/character_sprites_lab.tscn` is the visual test bench: a focused
+4x generated character. The button bar and keys change character
+(Tab / Shift+Tab), animation (Q/E), and facing (arrow keys or WASD); the
+facing cycle only offers directions the current animation can play; Space
+pauses. Run `tools/capture_character_sprites.sh` to write the `stand_down`,
+`idle_down`, `walk_right`, and `sleep` state captures to
+`artifacts/screenshots/character_sprites/`.
+
 ## Project layout
 
 Feature folders over file-type folders, per Godot convention as a project
 grows:
 
+- `sprites/` — compact character-strip resources, generated-strip loader,
+  `CharacterSprite` render node, and its lab scene
 - `character/` — the character system: rig scene (`character_preview.tscn`),
   canvas renderer (`character_canvas.gd`), palette grade shader, and
   `character/labs/` with every visual test bench
