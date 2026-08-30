@@ -1,7 +1,7 @@
 extends Node2D
 
 ## Visual test bench for generated compact-strip characters. It reads the
-## character IDs from characters/generated_characters.yaml.
+## YAML appearance list; gameplay can load a known character ID directly.
 
 const FOCUS_SCALE := 4.0
 const FLOOR_Y := 176.0
@@ -20,11 +20,7 @@ var focus: CharacterSprite
 
 
 func _ready() -> void:
-    var config := GeneratedCharacters.load_config()
-    if config.is_empty():
-        return
-    for character_data in config.characters:
-        character_ids.append(StringName(str(character_data.id)))
+    character_ids = GeneratedCharacters.character_ids()
     if character_ids.is_empty():
         push_error("No generated characters are configured.")
         return

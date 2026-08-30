@@ -342,14 +342,14 @@ a texture plus a list of animation definitions, rendered by a lightweight
   `<animation>_<facing>`, so changing `facing` (`down`/`left`/`up`/`right`)
   retargets the animation automatically, and non-directional animations such
   as `sleep` play verbatim.
-- `sprites/generated_characters.gd` — loads the YAML character definitions
-  and their generated compact strips. The loader derives contiguous animation
-  ranges from the configured action list.
+- `sprites/generated_characters.gd` — loads YAML appearance definitions at
+  build time and fixed-layout compact strips with cached `CharacterSheet`
+  resources at runtime.
 - `sprites/character_generator_layout.gd` — source-atlas action definitions
   used by both the strip builder and runtime loader.
-- `characters/generated_characters.yaml` — top-level action selections,
-  followed by each character's layer selections. Run
-  `tools/build_generated_characters.gd` after editing it.
+- `assets/characters/generated_characters.yaml` — each character's layer
+  selections. Run `tools/build_generated_characters.gd` after editing it; use
+  `-- --check` to validate generated strips in automation.
 
 `sprites/labs/character_sprites_lab.tscn` is the visual test bench: a focused
 4x generated character. The button bar and keys change character

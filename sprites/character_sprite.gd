@@ -13,6 +13,7 @@ extends Node2D
 
 signal animation_changed(anim: StringName)
 signal animation_finished
+signal animation_event(event: StringName)
 
 const FACINGS: Array[StringName] = CharacterSheet.FACINGS
 
@@ -48,6 +49,7 @@ func _init() -> void:
     _sprite.name = "Sprite"
     add_child(_sprite)
     _sprite.animation_finished.connect(func() -> void: animation_finished.emit())
+    _sprite.frame_changed.connect(_emit_frame_events)
 
 
 ## The animation actually being displayed after facing/default resolution.
@@ -55,9 +57,20 @@ func resolved_animation() -> StringName:
     return _resolve_animation()
 
 
-func play_anim(anim: StringName) -> void:
-    animation = anim
+func play_action(action: StringName, direction: StringName = &"") -> void:
+    if direction != &"":
+        facing = direction
+    animation = action
     playing = true
+
+
+## Backward-compatible alias for existing callers.
+func play_anim(anim: StringName) -> void:
+    play_action(anim)
+
+
+func set_facing(direction: StringName) -> void:
+    facing = direction
 
 
 func _resolve_animation() -> StringName:
@@ -100,6 +113,17 @@ func _refresh() -> void:
         _sprite.play(anim)
     elif not playing and _sprite.is_playing():
         _sprite.pause()
+
+
+func _emit_frame_events() -> void:
+    if sheet == null:
+        return
+    var definition := sheet.find_animation(_sprite.animation)
+    if definition == null:
+        return
+    for event_name in definition.frame_events:
+        if int(definition.frame_events[event_name]) == _sprite.frame:
+            animation_event.emit(StringName(event_name))
 
 
 func _draw() -> void:

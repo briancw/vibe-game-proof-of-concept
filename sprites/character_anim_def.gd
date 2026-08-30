@@ -9,3 +9,6 @@ extends Resource
 @export var frames := 1
 @export var fps := 8.0
 @export var loop := true
+
+## Event name -> zero-based frame index, e.g. {"impact": 3}.
+@export var frame_events: Dictionary = {}

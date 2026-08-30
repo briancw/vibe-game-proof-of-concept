@@ -1,134 +1,30 @@
 class_name CharacterGeneratorLayout
 extends RefCounted
 
-## The generator's fixed 16x16 source-sheet layout, expressed in top-left
-## pixel coordinates.
+## The complete fixed contract for generated character strips. `source_origin`
+## is where art is read from a raw layer; `origin` is where it lives in every
+## generated 928x32 runtime strip. Keep this table authoritative and explicit:
+## it is the only place a human or tool needs to inspect animation indexing.
 
 const FRAME_SIZE := Vector2i(16, 32)
-const SHEET_SIZE := Vector2i(896, 656)
+const SOURCE_SHEET_SIZE := Vector2i(896, 656)
+const STRIP_SIZE := Vector2i(928, 32)
 
-const ACTIONS: Dictionary = {
-	"stand": {
-		"fps": 1.0,
-		"frames": 1,
-		"directions": [
-			{"name": "right", "origin": [0, 0]},
-			{"name": "up", "origin": [16, 0]},
-			{"name": "left", "origin": [32, 0]},
-			{"name": "down", "origin": [48, 0]},
-		],
-	},
-	"idle": {
-		"fps": 12.0,
-		"frames": 6,
-		"directions": [
-			{"name": "right", "origin": [0, 32]},
-			{"name": "up", "origin": [96, 32]},
-			{"name": "left", "origin": [192, 32]},
-			{"name": "down", "origin": [288, 32]},
-		],
-	},
-	"walk": {
-		"fps": 12.0,
-		"frames": 6,
-		"directions": [
-			{"name": "right", "origin": [0, 64]},
-			{"name": "up", "origin": [96, 64]},
-			{"name": "left", "origin": [192, 64]},
-			{"name": "down", "origin": [288, 64]},
-		],
-	},
-	"sleep": {
-		"fps": 4.0,
-		"frames": 6,
-		"directions": [{"name": "", "origin": [0, 96]}],
-	},
-	"sit": {
-		"fps": 12.0,
-		"frames": 6,
-		"directions": [
-			{"name": "right", "origin": [0, 128]},
-			{"name": "left", "origin": [96, 128]},
-		],
-	},
-	"read": {
-		"fps": 12.0,
-		"frames": 12,
-		"directions": [{"name": "", "origin": [0, 224]}],
-	},
-	"pickup": {
-		"fps": 12.0,
-		"frames": 12,
-		"directions": [
-			{"name": "right", "origin": [0, 288]},
-			{"name": "up", "origin": [192, 288]},
-			{"name": "left", "origin": [384, 288]},
-			{"name": "down", "origin": [576, 288]},
-		],
-	},
-	"gift": {
-		"fps": 12.0,
-		"frames": 10,
-		"directions": [
-			{"name": "right", "origin": [0, 320]},
-			{"name": "up", "origin": [160, 320]},
-			{"name": "left", "origin": [320, 320]},
-			{"name": "down", "origin": [480, 320]},
-		],
-	},
-	"lift": {
-		"fps": 12.0,
-		"frames": 14,
-		"directions": [
-			{"name": "right", "origin": [0, 352]},
-			{"name": "up", "origin": [224, 352]},
-			{"name": "left", "origin": [448, 352]},
-			{"name": "down", "origin": [672, 352]},
-		],
-	},
-	"throw": {
-		"fps": 12.0,
-		"frames": 14,
-		"directions": [
-			{"name": "right", "origin": [0, 384]},
-			{"name": "up", "origin": [224, 384]},
-			{"name": "left", "origin": [448, 384]},
-			{"name": "down", "origin": [672, 384]},
-		],
-	},
-	"hit": {
-		"fps": 12.0,
-		"frames": 6,
-		"directions": [
-			{"name": "right", "origin": [0, 416]},
-			{"name": "up", "origin": [96, 416]},
-			{"name": "left", "origin": [192, 416]},
-			{"name": "down", "origin": [288, 416]},
-		],
-	},
-	"hurt": {
-		"fps": 6.0,
-		"frames": 3,
-		"directions": [
-			{"name": "right", "origin": [0, 608]},
-			{"name": "up", "origin": [48, 608]},
-			{"name": "left", "origin": [96, 608]},
-			{"name": "down", "origin": [144, 608]},
-		],
-	},
-}
-
-
-static func supports(action: String) -> bool:
-	return ACTIONS.has(action.to_lower())
-
-
-static func available_actions() -> PackedStringArray:
-	var names: PackedStringArray = []
-	for action in ACTIONS:
-		names.append(action)
-	names.sort()
-	return names
+const DEFINITIONS: Array[Dictionary] = [
+	{"name": "stand_right", "source_origin": Vector2i(0, 0), "origin": Vector2i(0, 0), "frames": 1, "fps": 1.0, "loop": true, "frame_events": {}},
+	{"name": "stand_up", "source_origin": Vector2i(16, 0), "origin": Vector2i(16, 0), "frames": 1, "fps": 1.0, "loop": true, "frame_events": {}},
+	{"name": "stand_left", "source_origin": Vector2i(32, 0), "origin": Vector2i(32, 0), "frames": 1, "fps": 1.0, "loop": true, "frame_events": {}},
+	{"name": "stand_down", "source_origin": Vector2i(48, 0), "origin": Vector2i(48, 0), "frames": 1, "fps": 1.0, "loop": true, "frame_events": {}},
+	{"name": "idle_right", "source_origin": Vector2i(0, 32), "origin": Vector2i(64, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "idle_up", "source_origin": Vector2i(96, 32), "origin": Vector2i(160, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "idle_left", "source_origin": Vector2i(192, 32), "origin": Vector2i(256, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "idle_down", "source_origin": Vector2i(288, 32), "origin": Vector2i(352, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "walk_right", "source_origin": Vector2i(0, 64), "origin": Vector2i(448, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "walk_up", "source_origin": Vector2i(96, 64), "origin": Vector2i(544, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "walk_left", "source_origin": Vector2i(192, 64), "origin": Vector2i(640, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "walk_down", "source_origin": Vector2i(288, 64), "origin": Vector2i(736, 0), "frames": 6, "fps": 12.0, "loop": true, "frame_events": {}},
+	{"name": "sleep", "source_origin": Vector2i(0, 96), "origin": Vector2i(832, 0), "frames": 6, "fps": 4.0, "loop": true, "frame_events": {}},
+]
 
 
 static func frame_size() -> Vector2i:
@@ -136,26 +32,26 @@ static func frame_size() -> Vector2i:
 
 
 static func sheet_size() -> Vector2i:
-	return SHEET_SIZE
+	return SOURCE_SHEET_SIZE
 
 
-## Returns one runtime/export definition per direction. A definition's name is
-## e.g. `walk_left`; non-directional actions retain their action name.
-static func definitions(actions: Array) -> Array[Dictionary]:
+static func strip_size() -> Vector2i:
+	return STRIP_SIZE
+
+
+static func frame_count() -> int:
+	var count := 0
+	for definition in DEFINITIONS:
+		count += int(definition.frames)
+	return count
+
+
+static func runtime_definitions() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
-	for requested_action in actions:
-		var action := String(requested_action).to_lower()
-		if not ACTIONS.has(action):
-			continue
-		var action_data: Dictionary = ACTIONS[action]
-		for direction_data in action_data.directions:
-			var direction := String(direction_data.name)
-			var point: Array = direction_data.origin
-			result.append({
-				"name": action if direction.is_empty() else "%s_%s" % [action, direction],
-				"origin": Vector2i(int(point[0]), int(point[1])),
-				"frames": int(action_data.frames),
-				"fps": float(action_data.fps),
-				"loop": true,
-			})
+	for definition in DEFINITIONS:
+		result.append(definition.duplicate(true))
 	return result
+
+
+static func default_animation() -> StringName:
+	return &"stand_down"

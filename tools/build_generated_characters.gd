@@ -1,12 +1,11 @@
 @tool
 extends SceneTree
 
-## Composes raw Character Generator PNG layers according to YAML and writes a
-## compact, one-row runtime strip containing only the requested animations.
+## Builds fixed-layout compact strips. --check rebuilds in memory and compares
+## pixels, so it detects stale PNGs without writing manifest sidecar files.
 ##
-## Run:
 ##   godot --headless --path . --script res://tools/build_generated_characters.gd
-##   godot --headless --path . --script res://tools/build_generated_characters.gd -- res://characters/generated_characters.yaml
+##   godot --headless --path . --script res://tools/build_generated_characters.gd -- --check
 
 const GeneratedCharacters = preload("res://sprites/generated_characters.gd")
 const CharacterGeneratorLayout = preload("res://sprites/character_generator_layout.gd")
@@ -14,50 +13,62 @@ const CharacterGeneratorLayout = preload("res://sprites/character_generator_layo
 
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
-	var config_path := GeneratedCharacters.DEFAULT_CONFIG_PATH if args.is_empty() else String(args[0])
+	var check_only := "--check" in args
+	var config_path := _config_path(args)
 	var config := GeneratedCharacters.load_config(config_path)
 	if config.is_empty():
 		quit(1)
 		return
-	var output_dir: String = GeneratedCharacters.OUTPUT_DIR
-	var output_error := DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output_dir))
-	if output_error != OK:
-		push_error("Could not create generated-character output directory: %s" % output_dir)
-		quit(1)
-		return
-
+	if not check_only:
+		var output_error := DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(GeneratedCharacters.OUTPUT_DIR))
+		if output_error != OK:
+			push_error("Could not create generated-character output directory: %s" % GeneratedCharacters.OUTPUT_DIR)
+			quit(1)
+			return
 	var failures := 0
 	for character_data in config.characters:
-		if not _build_character(character_data, config):
+		if not _process_character(character_data, check_only):
 			failures += 1
 	quit(1 if failures > 0 else 0)
 
 
-func _build_character(character_data: Dictionary, config: Dictionary) -> bool:
+func _config_path(args: PackedStringArray) -> String:
+	for arg in args:
+		if arg != "--check":
+			return arg
+	return GeneratedCharacters.DEFAULT_CONFIG_PATH
+
+
+func _process_character(character_data: Dictionary, check_only: bool) -> bool:
 	var id := str(character_data.id)
 	var composite := _compose(character_data)
 	if composite == null:
 		return false
-
-	var source_definitions := CharacterGeneratorLayout.definitions(config.animations)
-	var packed_size := GeneratedCharacters.packed_strip_size(config.animations)
-	var packed_strip := Image.create_empty(packed_size.x, packed_size.y, false, Image.FORMAT_RGBA8)
-	var next_x := 0
-	for definition in source_definitions:
-		var strip_size := Vector2i(CharacterGeneratorLayout.frame_size().x * int(definition.frames), CharacterGeneratorLayout.frame_size().y)
-		var region := Rect2i(definition.origin, strip_size)
+	var strip := Image.create_empty(CharacterGeneratorLayout.strip_size().x, CharacterGeneratorLayout.strip_size().y, false, Image.FORMAT_RGBA8)
+	for definition in CharacterGeneratorLayout.runtime_definitions():
+		var source_origin: Vector2i = definition.source_origin
+		var target_origin: Vector2i = definition.origin
+		var region := Rect2i(source_origin, Vector2i(CharacterGeneratorLayout.frame_size().x * int(definition.frames), CharacterGeneratorLayout.frame_size().y))
 		if not Rect2i(Vector2i.ZERO, composite.get_size()).encloses(region):
-			push_error("%s on %s lies outside the generated sheet." % [definition.name, id])
+			push_error("%s on %s lies outside the source sheet." % [definition.name, id])
 			return false
-		packed_strip.blend_rect(composite, region, Vector2i(next_x, 0))
-		next_x += strip_size.x
-
-	var sheet_path := GeneratedCharacters.sheet_path(id)
-	if packed_strip.save_png(ProjectSettings.globalize_path(sheet_path)) != OK:
-		push_error("Could not save generated character strip: %s" % sheet_path)
+		strip.blend_rect(composite, region, target_origin)
+	var path := GeneratedCharacters.sheet_path(id)
+	if check_only:
+		var existing := Image.load_from_file(ProjectSettings.globalize_path(path))
+		if existing == null or existing.is_empty() or existing.get_size() != strip.get_size():
+			push_error("Generated character is stale or missing: %s. Run tools/build_generated_characters.gd." % id)
+			return false
+		existing.convert(Image.FORMAT_RGBA8)
+		if existing.get_data() != strip.get_data():
+			push_error("Generated character is stale: %s. Run tools/build_generated_characters.gd." % id)
+			return false
+		print("Current: %s" % id)
+		return true
+	if strip.save_png(ProjectSettings.globalize_path(path)) != OK:
+		push_error("Could not save generated character strip: %s" % path)
 		return false
-
-	print("Generated %s (%d layers, %d frames, %s runtime strip)." % [id, GeneratedCharacters.selected_layers(character_data).size(), packed_size.x / CharacterGeneratorLayout.frame_size().x, packed_size])
+	print("Generated %s (%d layers, %d frames, %s runtime strip)." % [id, GeneratedCharacters.selected_layers(character_data).size(), CharacterGeneratorLayout.frame_count(), strip.get_size()])
 	return true
 
 
@@ -68,7 +79,6 @@ func _compose(character_data: Dictionary) -> Image:
 	if layers.is_empty():
 		push_error("No usable layers were selected for %s." % character_data.id)
 		return null
-
 	for layer in layers:
 		var image := Image.load_from_file(ProjectSettings.globalize_path(layer.path))
 		if image == null or image.is_empty():
