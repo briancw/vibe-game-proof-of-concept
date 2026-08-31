@@ -1,7 +1,10 @@
-# Legacy premade character sheet layout
+# Premade character sheet layout
 
-This document describes the generator-style premade character sheets in
-`assets/characters/16x16/`.
+This document describes the premade character sheets from the Limezu Modern
+Interiors pack (via the Character Generator) that live in
+`assets/characters/Character_Generator`. These sheets are the upstream source of our
+character art: the game does not use them verbatim, but extracts and
+transforms the animation strips it needs from this layout.
 
 ## Coordinate convention
 
@@ -17,12 +20,12 @@ This document describes the generator-style premade character sheets in
 These names are descriptive labels; they are not embedded in the PNG or the
 Aseprite file.
 
-| Label | Frame origins | Frames | FPS | Notes |
-| --- | --- | ---: | ---: | --- |
-| `stand_right`, `stand_up`, `stand_left`, `stand_down` | `(0, 0)`, `(16, 0)`, `(32, 0)`, `(48, 0)` | 1 | 1 | Four static directional poses. |
-| `idle_*` | `(0, 32)`, `(96, 32)`, `(192, 32)`, `(288, 32)` | 6 | 12 | Generator’s named Idle animation. |
-| `walk_*` | `(0, 64)`, `(96, 64)`, `(192, 64)`, `(288, 64)` | 6 | 12 | Generator’s named Walk animation. |
-| `sleep` | `(0, 96)` | 6 | 4 | First six cells of the Sleep export row. |
+| Label                                                 | Frame origins                                   | Frames | FPS | Notes                                    |
+| ----------------------------------------------------- | ----------------------------------------------- | -----: | --: | ---------------------------------------- |
+| `stand_right`, `stand_up`, `stand_left`, `stand_down` | `(0, 0)`, `(16, 0)`, `(32, 0)`, `(48, 0)`       |      1 |   1 | Four static directional poses.           |
+| `idle_*`                                              | `(0, 32)`, `(96, 32)`, `(192, 32)`, `(288, 32)` |      6 |  12 | Generator’s named Idle animation.        |
+| `walk_*`                                              | `(0, 64)`, `(96, 64)`, `(192, 64)`, `(288, 64)` |      6 |  12 | Generator’s named Walk animation.        |
+| `sleep`                                               | `(0, 96)`                                       |      6 |   4 | First six cells of the Sleep export row. |
 
 ## Generator-authoritative preview animations
 
@@ -30,18 +33,18 @@ The generator's Unity project supplies named sprite rectangles and animation
 clips for these actions. It plays all of these as loops. Their direction order
 is **right → up → left → down** unless a row says otherwise.
 
-| Generator action | Direction origins (x, y) | Frames per direction | FPS | Directions |
-| --- | --- | ---: | ---: | --- |
-| Idle | `(0, 32)`, `(96, 32)`, `(192, 32)`, `(288, 32)` | 6 | 12 | right, up, left, down |
-| Walk | `(0, 64)`, `(96, 64)`, `(192, 64)`, `(288, 64)` | 6 | 12 | right, up, left, down |
-| Sit | `(0, 128)`, `(96, 128)` | 6 | 12 | right, left |
-| Read | `(0, 224)` | 12 | 12 | one non-directional strip |
-| Pick Up | `(0, 288)`, `(192, 288)`, `(384, 288)`, `(576, 288)` | 12 | 12 | right, up, left, down |
-| Gift | `(0, 320)`, `(160, 320)`, `(320, 320)`, `(480, 320)` | 10 | 12 | right, up, left, down |
-| Lift | `(0, 352)`, `(224, 352)`, `(448, 352)`, `(672, 352)` | 14 | 12 | right, up, left, down |
-| Throw | `(0, 384)`, `(224, 384)`, `(448, 384)`, `(672, 384)` | 14 | 12 | right, up, left, down |
-| Hit | `(0, 416)`, `(96, 416)`, `(192, 416)`, `(288, 416)` | 6 | 12 | right, up, left, down |
-| Hurt | `(0, 608)`, `(48, 608)`, `(96, 608)`, `(144, 608)` | 3 | 6 | right, up, left, down |
+| Generator action | Direction origins (x, y)                             | Frames per direction | FPS | Directions                |
+| ---------------- | ---------------------------------------------------- | -------------------: | --: | ------------------------- |
+| Idle             | `(0, 32)`, `(96, 32)`, `(192, 32)`, `(288, 32)`      |                    6 |  12 | right, up, left, down     |
+| Walk             | `(0, 64)`, `(96, 64)`, `(192, 64)`, `(288, 64)`      |                    6 |  12 | right, up, left, down     |
+| Sit              | `(0, 128)`, `(96, 128)`                              |                    6 |  12 | right, left               |
+| Read             | `(0, 224)`                                           |                   12 |  12 | one non-directional strip |
+| Pick Up          | `(0, 288)`, `(192, 288)`, `(384, 288)`, `(576, 288)` |                   12 |  12 | right, up, left, down     |
+| Gift             | `(0, 320)`, `(160, 320)`, `(320, 320)`, `(480, 320)` |                   10 |  12 | right, up, left, down     |
+| Lift             | `(0, 352)`, `(224, 352)`, `(448, 352)`, `(672, 352)` |                   14 |  12 | right, up, left, down     |
+| Throw            | `(0, 384)`, `(224, 384)`, `(448, 384)`, `(672, 384)` |                   14 |  12 | right, up, left, down     |
+| Hit              | `(0, 416)`, `(96, 416)`, `(192, 416)`, `(288, 416)`  |                    6 |  12 | right, up, left, down     |
+| Hurt             | `(0, 608)`, `(48, 608)`, `(96, 608)`, `(144, 608)`   |                    3 |   6 | right, up, left, down     |
 
 ## Other named export strips
 
@@ -51,26 +54,26 @@ clips; the export regions alone do not specify direction groups or playback
 rates for every row.
 
 | Top y | Export name | Strip width | 16 px cells |
-| ---: | --- | ---: | ---: |
-| 32 | Idle | 384 | 24 |
-| 64 | Walk | 384 | 24 |
-| 96 | Sleep | 208 | 13 |
-| 128 | Sit 1 | 192 | 12 |
-| 160 | Sit 2 | 192 | 12 |
-| 192 | Phone | 192 | 12 |
-| 224 | Read | 192 | 12 |
-| 256 | Push Cart | 768 | 48 |
-| 288 | Pickup | 768 | 48 |
-| 320 | Gift | 640 | 40 |
-| 352 | Lift | 896 | 56 |
-| 384 | Throw | 896 | 56 |
-| 416 | Hit | 384 | 24 |
-| 448 | Punch | 384 | 24 |
-| 480 | Stab | 768 | 48 |
-| 512 | Grab Gun | 256 | 16 |
-| 544 | Gun Idle | 384 | 24 |
-| 576 | Shoot | 192 | 12 |
-| 608 | Hurt | 208 | 13 |
+| ----: | ----------- | ----------: | ----------: |
+|    32 | Idle        |         384 |          24 |
+|    64 | Walk        |         384 |          24 |
+|    96 | Sleep       |         208 |          13 |
+|   128 | Sit 1       |         192 |          12 |
+|   160 | Sit 2       |         192 |          12 |
+|   192 | Phone       |         192 |          12 |
+|   224 | Read        |         192 |          12 |
+|   256 | Push Cart   |         768 |          48 |
+|   288 | Pickup      |         768 |          48 |
+|   320 | Gift        |         640 |          40 |
+|   352 | Lift        |         896 |          56 |
+|   384 | Throw       |         896 |          56 |
+|   416 | Hit         |         384 |          24 |
+|   448 | Punch       |         384 |          24 |
+|   480 | Stab        |         768 |          48 |
+|   512 | Grab Gun    |         256 |          16 |
+|   544 | Gun Idle    |         384 |          24 |
+|   576 | Shoot       |         192 |          12 |
+|   608 | Hurt        |         208 |          13 |
 
 ### Sleep row note
 
